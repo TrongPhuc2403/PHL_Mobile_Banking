@@ -1,0 +1,35 @@
+# Android and Gradle
+.gradle/
+.kotlin/
+build/
+local.properties
+captures/
+.cxx/
+.externalNativeBuild/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# IDE and operating system
+.idea/
+*.iml
+.vscode/
+Thumbs.db
+.DS_Store
+~$*
+
+# Local build output and dependencies
+node_modules/
+dist/
+target/
+*.log
+
+# Local credentials and service configuration
+.env
+.env.*
+!.env.example
+google-services.json
+*service-account*.json
+*.pem
+*.p12
