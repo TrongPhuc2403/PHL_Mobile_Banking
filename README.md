@@ -9,13 +9,16 @@ Repo đang ở giai đoạn khởi tạo. Các thư mục bên dưới là vị 
 | Thư mục | Nội dung |
 | --- | --- |
 | `android/` | Ứng dụng Android, giao diện theo vai trò và kết nối API |
+| `frontend/` | Mã nguồn frontend |
 | `backend/` | API, xác thực, phân quyền, xử lý giao dịch và tích hợp dịch vụ |
-| `database/` | Lược đồ, migration và dữ liệu mô phỏng dùng khi phát triển |
+| `database/` | Schema MySQL 8.0 gồm 13 bảng và hướng dẫn khởi tạo |
 | `docs/` | Phạm vi, thiết kế và tài liệu kiểm thử |
 
 ## Phạm vi
 
 [Danh mục 33 use case](docs/requirements.md) đối chiếu bảy nhóm chức năng của đề bài với đặc tả PHL. Ứng dụng Android, cơ sở dữ liệu, phát hành Google Play, báo cáo và video demo là các hạng mục của đồ án.
+
+Xem [hướng dẫn cơ sở dữ liệu](database/README.md) để tạo và kiểm tra schema.
 
 ## Phân công
 
