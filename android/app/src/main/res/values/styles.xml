@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Typography -->
+    <style name="TextAppearance.PHL.Display" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_display_md</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">@dimen/text_headline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.SectionTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.CardTitle" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/text_subtitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/phl_navy</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="TextAppearance.PHL.BodySecondary" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_body_md</item>
+        <item name="android:textColor">@color/phl_text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_body_sm</item>
+        <item name="android:textColor">@color/phl_text_muted</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Overline" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.10</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/phl_gold_soft</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Amount" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">@color/phl_text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFeatureSettings">tnum</item>
+    </style>
+
+    <style name="TextAppearance.PHL.AmountLarge" parent="TextAppearance.PHL.Amount">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/phl_navy</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.PHL.AmountSmall" parent="TextAppearance.PHL.Amount">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Amount.Hero" parent="TextAppearance.PHL.Amount">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/phl_white</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Amount.Row" parent="TextAppearance.PHL.Amount">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/phl_text_primary</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Amount.Rate" parent="TextAppearance.PHL.Amount">
+        <item name="android:textSize">@dimen/text_section</item>
+        <item name="android:textColor">@color/phl_emerald</item>
+    </style>
+
+    <style name="TextAppearance.PHL.Pill" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:fontFeatureSettings">tnum</item>
+    </style>
+
+    <!-- Cards -->
+    <style name="Widget.PHL.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/phl_surface</item>
+        <item name="strokeColor">@color/phl_border</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
+        <item name="cardElevation">@dimen/elevation_subtle</item>
+    </style>
+
+    <style name="Widget.PHL.Card.Elevated" parent="Widget.PHL.Card">
+        <item name="cardBackgroundColor">@color/phl_surface_elevated</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+    </style>
+
+    <style name="Widget.PHL.Card.Hero" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/phl_navy</item>
+        <item name="strokeColor">@color/phl_navy_border_dark</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="cardCornerRadius">@dimen/radius_xl</item>
+        <item name="cardElevation">@dimen/elevation_raised</item>
+    </style>
+
+    <style name="Widget.PHL.Card.Navy" parent="Widget.PHL.Card.Hero" />
+
+    <style name="Widget.PHL.Card.GoldTint" parent="Widget.PHL.Card">
+        <item name="cardBackgroundColor">@color/phl_gold_tint</item>
+        <item name="strokeColor">@color/phl_gold_stroke</item>
+    </style>
+
+    <style name="Widget.PHL.Card.Tile" parent="Widget.PHL.Card">
+        <item name="rippleColor">@color/phl_ripple_light</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="Widget.PHL.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/selector_btn_primary_bg</item>
+        <item name="android:textColor">@color/selector_btn_primary_text</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
+        <item name="android:minHeight">@dimen/btn_height_primary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
+        <item name="rippleColor">@color/phl_ripple_dark</item>
+    </style>
+
+    <style name="Widget.PHL.Button.Gold" parent="Widget.PHL.Button.Primary">
+        <item name="backgroundTint">@color/phl_gold</item>
+        <item name="android:textColor">@color/phl_white</item>
+    </style>
+
+    <style name="Widget.PHL.Button.Emerald" parent="Widget.PHL.Button.Primary">
+        <item name="backgroundTint">@color/phl_emerald</item>
+        <item name="android:textColor">@color/phl_white</item>
+    </style>
+
+    <style name="Widget.PHL.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/phl_border_strong</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="android:textColor">@color/phl_navy</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
+        <item name="android:minHeight">@dimen/btn_height_secondary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="rippleColor">@color/phl_ripple_light</item>
+    </style>
+
+    <style name="Widget.PHL.Button.Outlined.Danger" parent="Widget.PHL.Button.Outlined">
+        <item name="strokeColor">@color/phl_danger_stroke</item>
+        <item name="android:textColor">@color/phl_danger</item>
+    </style>
+
+    <style name="Widget.PHL.Button.Text.Light" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/phl_white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="rippleColor">@color/phl_ripple_dark</item>
+    </style>
+
+    <!-- Inputs & Chips -->
+    <style name="Widget.PHL.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
+        <item name="boxStrokeColor">@color/selector_input_stroke</item>
+        <item name="boxStrokeWidth">@dimen/stroke_hairline</item>
+        <item name="boxStrokeWidthFocused">@dimen/stroke_medium</item>
+        <item name="boxBackgroundColor">@color/phl_surface</item>
+        <item name="hintTextColor">@color/phl_navy</item>
+        <item name="android:textColorHint">@color/phl_text_muted</item>
+    </style>
+
+    <style name="Widget.PHL.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/selector_chip_bg</item>
+        <item name="chipStrokeColor">@color/selector_chip_stroke</item>
+        <item name="chipStrokeWidth">@dimen/stroke_hairline</item>
+        <item name="android:textColor">@color/selector_chip_text</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipCornerRadius">@dimen/radius_pill</item>
+        <item name="chipMinHeight">38dp</item>
+        <item name="rippleColor">@color/phl_ripple_light</item>
+    </style>
+
+    <!-- Navigation & Toolbar -->
+    <style name="Widget.PHL.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/phl_surface</item>
+        <item name="itemIconTint">@color/selector_nav_icon</item>
+        <item name="itemTextColor">@color/selector_nav_text</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.PHL.BottomNavigationView.ActiveIndicator</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemRippleColor">@color/phl_ripple_light</item>
+        <item name="elevation">@dimen/elevation_sheet</item>
+    </style>
+
+    <style name="Widget.PHL.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/phl_nav_indicator</item>
+        <item name="android:width">56dp</item>
+        <item name="android:height">30dp</item>
+    </style>
+
+    <style name="Widget.PHL.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/phl_navy</item>
+        <item name="titleTextColor">@color/phl_white</item>
+        <item name="subtitleTextColor">@color/phl_navy_on_dark_muted</item>
+        <item name="navigationIconTint">@color/phl_white</item>
+    </style>
+
+    <!-- BottomSheet & Dialog Shapes -->
+    <style name="Widget.PHL.BottomSheet.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/phl_surface</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.PHL.BottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearance.PHL.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/radius_xxl</item>
+        <item name="cornerSizeTopRight">@dimen/radius_xxl</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.PHL.Dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_xl</item>
+    </style>
+</resources>

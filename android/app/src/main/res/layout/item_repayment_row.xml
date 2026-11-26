@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space_xs"
+    android:background="@drawable/bg_luxury_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/space_md">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRepaymentPeriod"
+                style="@style/TextAppearance.PHL.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFeatureSettings="tnum"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRepaymentDueDate"
+                style="@style/TextAppearance.PHL.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_sm"
+                android:fontFeatureSettings="tnum" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRepaymentBreakdown"
+            style="@style/TextAppearance.PHL.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:fontFeatureSettings="tnum" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_sm"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvRepaymentTotal"
+            style="@style/TextAppearance.PHL.Amount.Row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFeatureSettings="tnum" />
+
+        <TextView
+            android:id="@+id/tvRepaymentStatus"
+            style="@style/TextAppearance.PHL.Pill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:paddingStart="@dimen/space_sm"
+            android:paddingTop="@dimen/space_xxs"
+            android:paddingEnd="@dimen/space_sm"
+            android:paddingBottom="@dimen/space_xxs" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl">
+
+        <!-- Midnight Navy Private Banking Header -->
+        <LinearLayout
+            android:id="@+id/layoutHomeHero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navy_hero"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/space_lg"
+            android:paddingTop="@dimen/space_xl"
+            android:paddingEnd="@dimen/space_lg"
+            android:paddingBottom="76dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/receipt_brand_header"
+                    android:textColor="@color/phl_gold_light" />
+
+                <TextView
+                    android:id="@+id/tvHomeGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Xin chào"
+                    android:textColor="@color/phl_white"
+                    android:textSize="@dimen/text_section"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextAppearance.PHL.Pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:background="@drawable/bg_pill_navy_dark"
+                android:paddingStart="@dimen/space_md"
+                android:paddingTop="@dimen/space_xs"
+                android:paddingEnd="@dimen/space_md"
+                android:paddingBottom="@dimen/space_xs"
+                android:text="PHL PRIVATE"
+                android:textColor="@color/phl_gold_light" />
+
+            <FrameLayout
+                android:layout_width="@dimen/icon_badge_size"
+                android:layout_height="@dimen/icon_badge_size"
+                android:background="@drawable/bg_navy_crest_circle">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_md"
+                    android:layout_height="@dimen/icon_size_md"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_phl_shield"
+                    app:tint="@color/phl_gold_light" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Prestige Checking Card (Overlapping Hero) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHomePrestige"
+            style="@style/Widget.PHL.Card.Hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="-56dp"
+            android:layout_marginEnd="@dimen/space_base">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_navy_card_prestige">
+
+                <View
+                    android:id="@+id/viewHomeShimmer"
+                    android:layout_width="110dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_shimmer_sweep"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_lg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="36dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_m2_emv_chip" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_md"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/TextAppearance.PHL.Overline"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PRIVATE CHECKING"
+                                android:textColor="@color/phl_gold_light" />
+
+                            <TextView
+                                android:id="@+id/tvHomeAccountNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_xxs"
+                                android:fontFeatureSettings="tnum"
+                                android:text="TK Thanh toán: --"
+                                android:textColor="@color/phl_navy_on_dark_muted"
+                                android:textSize="@dimen/text_body_sm"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Pill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_pill_navy_dark"
+                            android:paddingStart="@dimen/space_sm"
+                            android:paddingTop="@dimen/space_xxs"
+                            android:paddingEnd="@dimen/space_sm"
+                            android:paddingBottom="@dimen/space_xxs"
+                            android:text="ACTIVE"
+                            android:textColor="@color/phl_emerald_stroke" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/hairline_height"
+                        android:layout_marginTop="@dimen/space_md"
+                        android:background="@drawable/bg_gold_hairline" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_md"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Số dư khả dụng"
+                                android:textColor="@color/phl_navy_on_dark_muted"
+                                android:textSize="@dimen/text_body_sm" />
+
+                            <TextView
+                                android:id="@+id/tvHomeBalance"
+                                style="@style/TextAppearance.PHL.Amount.Hero"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_xxs"
+                                android:fontFeatureSettings="tnum"
+                                android:text="0 VNĐ" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnToggleBalance"
+                            style="@style/Widget.PHL.Button.Text.Light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ẩn"
+                            android:textColor="@color/phl_gold_light"
+                            app:icon="@drawable/ic_eye_off"
+                            app:iconPadding="@dimen/space_xs"
+                            app:iconTint="@color/phl_gold_light" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHomeEkyc"
+            style="@style/Widget.PHL.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_sm"
+            android:text="Hồ sơ eKYC · Kiểm tra ảnh gốc"
+            android:textAlignment="viewStart"
+            app:icon="@drawable/ic_phl_shield" />
+
+        <!-- Quick Actions Elevated Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHomeQuickActions"
+            style="@style/Widget.PHL.Card.Elevated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_base"
+            android:layout_marginEnd="@dimen/space_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_md">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickTransfer"
+                    style="@style/Widget.PHL.Button.Outlined"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_xs"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/space_xs"
+                    android:paddingTop="@dimen/space_md"
+                    android:paddingEnd="@dimen/space_xs"
+                    android:paddingBottom="@dimen/space_md"
+                    android:text="Chuyển tiền"
+                    android:textSize="@dimen/text_body_sm"
+                    app:backgroundTint="@color/phl_navy_tint"
+                    app:cornerRadius="@dimen/radius_md"
+                    app:icon="@drawable/ic_transfer"
+                    app:iconGravity="top"
+                    app:iconPadding="@dimen/space_xs"
+                    app:iconSize="@dimen/icon_size_lg"
+                    app:iconTint="@color/phl_navy"
+                    app:rippleColor="@color/phl_ripple_light"
+                    app:strokeWidth="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickDepositWithdraw"
+                    style="@style/Widget.PHL.Button.Outlined"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_xs"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/space_xs"
+                    android:paddingTop="@dimen/space_md"
+                    android:paddingEnd="@dimen/space_xs"
+                    android:paddingBottom="@dimen/space_md"
+                    android:text="Nạp / Rút"
+                    android:textSize="@dimen/text_body_sm"
+                    app:backgroundTint="@color/phl_emerald_tint"
+                    app:cornerRadius="@dimen/radius_md"
+                    app:icon="@drawable/ic_deposit_withdraw"
+                    app:iconGravity="top"
+                    app:iconPadding="@dimen/space_xs"
+                    app:iconSize="@dimen/icon_size_lg"
+                    app:iconTint="@color/phl_emerald"
+                    app:rippleColor="@color/phl_ripple_light"
+                    app:strokeWidth="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuickGateway"
+                    style="@style/Widget.PHL.Button.Outlined"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/space_xs"
+                    android:paddingTop="@dimen/space_md"
+                    android:paddingEnd="@dimen/space_xs"
+                    android:paddingBottom="@dimen/space_md"
+                    android:text="VNPay/Stripe"
+                    android:textSize="@dimen/text_body_sm"
+                    app:backgroundTint="@color/phl_gold_tint"
+                    app:cornerRadius="@dimen/radius_md"
+                    app:icon="@drawable/ic_gateway"
+                    app:iconGravity="top"
+                    app:iconPadding="@dimen/space_xs"
+                    app:iconSize="@dimen/icon_size_lg"
+                    app:iconTint="@color/phl_gold"
+                    app:rippleColor="@color/phl_ripple_light"
+                    app:strokeWidth="0dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Recent History Section -->
+        <LinearLayout
+            android:id="@+id/layoutHomeHistorySection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/space_base"
+            android:paddingTop="@dimen/space_lg"
+            android:paddingEnd="@dimen/space_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.SectionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Biến động số dư gần đây" />
+
+                <TextView
+                    android:id="@+id/tvHistoryCount"
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_navy"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xxs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingBottom="@dimen/space_xxs"
+                    android:textColor="@color/phl_navy"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvHistoryEmpty"
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:background="@drawable/bg_luxury_card"
+                android:gravity="center"
+                android:padding="@dimen/space_xl"
+                android:text="Chưa có giao dịch phát sinh"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

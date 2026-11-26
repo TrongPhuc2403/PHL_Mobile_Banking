@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PHL Mobile Banking</string>
+    <string name="bank_brand_short">PHL BANK</string>
+    <string name="login_subtitle">Ngân hàng số dành cho Khách hàng &amp; Chuyên viên</string>
+    <string name="label_username">Tên đăng nhập</string>
+    <string name="label_password">Mật khẩu</string>
+    <string name="action_login">Đăng nhập</string>
+    <string name="action_forgot_password">Quên mật khẩu?</string>
+    <string name="action_logout">Đăng xuất</string>
+
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_accounts">Tài khoản</string>
+    <string name="nav_utilities">Tiện ích</string>
+    <string name="nav_explore">Khám phá</string>
+    <string name="nav_profile">Cá nhân</string>
+
+    <string name="nav_off_customers">Khách hàng</string>
+    <string name="nav_off_create">Mở tài khoản</string>
+    <string name="nav_off_rates">Lãi suất</string>
+    <string name="nav_off_audit">Nhật ký</string>
+
+    <!-- Shared M1 Luxury Strings -->
+    <string name="receipt_title">Biên lai điện tử</string>
+    <string name="receipt_brand_header">PHL PRIVATE BANKING</string>
+    <string name="receipt_share">Chia sẻ biên lai</string>
+    <string name="receipt_close">Đóng</string>
+    <string name="receipt_status_success">Giao dịch thành công</string>
+    <string name="receipt_label_trace">Mã tham chiếu</string>
+    <string name="receipt_label_type">Loại giao dịch</string>
+    <string name="receipt_label_amount">Số tiền</string>
+    <string name="receipt_label_fee">Phí giao dịch</string>
+    <string name="receipt_label_counterparty">Đối tác / Tài khoản đích</string>
+    <string name="receipt_label_content">Nội dung</string>
+    <string name="receipt_label_time">Thời gian</string>
+
+    <string name="change_pw_overline">BẢO MẬT TÀI KHOẢN</string>
+    <string name="change_pw_title">Đổi mật khẩu</string>
+    <string name="change_pw_subtitle">Cập nhật mật khẩu bảo vệ tài khoản PHL Bank</string>
+    <string name="change_pw_current">Mật khẩu hiện tại</string>
+    <string name="change_pw_new">Mật khẩu mới (tối thiểu 6 ký tự)</string>
+    <string name="change_pw_confirm">Nhập lại mật khẩu mới</string>
+    <string name="change_pw_submit">Xác nhận</string>
+    <string name="change_pw_cancel">Hủy</string>
+    <string name="change_pw_err_empty">Vui lòng nhập mật khẩu hiện tại</string>
+    <string name="change_pw_err_length">Mật khẩu mới phải có ít nhất 6 ký tự</string>
+    <string name="change_pw_err_mismatch">Xác nhận mật khẩu mới không khớp</string>
+    <string name="change_pw_err_current">Mật khẩu hiện tại không đúng</string>
+    <string name="change_pw_success">Đổi mật khẩu thành công</string>
+    <string name="err_network">Lỗi kết nối máy chủ</string>
+
+    <string name="action_hide_balance">Ẩn</string>
+    <string name="action_show_balance">Hiện</string>
+    <string name="splash_tagline">PRIVATE BANKING · DIGITAL WEALTH</string>
+</resources>

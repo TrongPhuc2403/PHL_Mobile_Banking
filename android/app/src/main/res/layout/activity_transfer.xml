@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarTransfer"
+        style="@style/Widget.PHL.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_navy_hero"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/phl_white"
+        app:title="Giao dịch tài chính"
+        app:titleTextColor="@color/phl_white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hairline_height"
+        android:background="@drawable/bg_gold_hairline" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_base">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipTransferMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipSpacingHorizontal="@dimen/space_sm"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipInternal"
+                        style="@style/Widget.PHL.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Nội bộ PHL" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipInterbank"
+                        style="@style/Widget.PHL.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Napas 24/7" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipGateway"
+                        style="@style/Widget.PHL.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VNPay/Stripe" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDeposit"
+                        style="@style/Widget.PHL.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nạp tiền" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipWithdraw"
+                        style="@style/Widget.PHL.Chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rút tiền" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSourceAccount"
+                style="@style/Widget.PHL.Card.Hero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_navy_card_prestige"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space_base">
+
+                    <FrameLayout
+                        android:layout_width="@dimen/icon_badge_size"
+                        android:layout_height="@dimen/icon_badge_size"
+                        android:background="@drawable/bg_navy_crest_circle">
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_md"
+                            android:layout_height="@dimen/icon_size_md"
+                            android:layout_gravity="center"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_wallet"
+                            app:tint="@color/phl_gold_light" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_md"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Overline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TÀI KHOẢN NGUỒN" />
+
+                        <TextView
+                            android:id="@+id/tvSourceAccountInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_xxs"
+                            android:fontFeatureSettings="tnum"
+                            android:text="Tài khoản nguồn: --"
+                            android:textColor="@color/phl_white"
+                            android:textSize="@dimen/text_subtitle"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTransferForm"
+                style="@style/Widget.PHL.Card.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md">
+
+                <LinearLayout
+                    android:id="@+id/layoutTransferFields"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_base">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilBankCode"
+                        style="@style/Widget.PHL.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mã ngân hàng / Cổng (VD: VCB, VNPAY, STRIPE)"
+                        android:visibility="gone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtBankCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="VCB" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilDestAccount"
+                        style="@style/Widget.PHL.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:hint="Số tài khoản nhận (VD: 190010020002)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDestAccount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="tnum"
+                            android:text="190010020002" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilDestName"
+                        style="@style/Widget.PHL.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:hint="Tên người nhận / Đơn vị"
+                        android:visibility="gone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDestName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NGUYEN MINH ANH" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilAmount"
+                        style="@style/Widget.PHL.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:hint="Số tiền (VNĐ)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="tnum"
+                            android:inputType="number" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvAmountFormattedPreview"
+                        style="@style/TextAppearance.PHL.AmountSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:textColor="@color/phl_emerald_dark"
+                        android:visibility="gone" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/scrollQuickAmounts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset100k"
+                                style="@style/Widget.PHL.Chip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checkable="false"
+                                android:fontFeatureSettings="tnum"
+                                android:text="100.000 đ" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset500k"
+                                style="@style/Widget.PHL.Chip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_sm"
+                                android:checkable="false"
+                                android:fontFeatureSettings="tnum"
+                                android:text="500.000 đ" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset1m"
+                                style="@style/Widget.PHL.Chip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_sm"
+                                android:checkable="false"
+                                android:fontFeatureSettings="tnum"
+                                android:text="1.000.000 đ" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset5m"
+                                style="@style/Widget.PHL.Chip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_sm"
+                                android:checkable="false"
+                                android:fontFeatureSettings="tnum"
+                                android:text="5.000.000 đ" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPreset15m"
+                                style="@style/Widget.PHL.Chip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_sm"
+                                android:checkable="false"
+                                android:fontFeatureSettings="tnum"
+                                android:text="15.000.000 đ" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:background="@drawable/bg_pill_gold"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_md"
+                        android:paddingStart="@dimen/space_md"
+                        android:paddingTop="@dimen/space_xs">
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_sm"
+                            android:layout_height="@dimen/icon_size_sm"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_lock"
+                            app:tint="@color/phl_gold" />
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Caption"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_xs"
+                            android:layout_weight="1"
+                            android:fontFeatureSettings="tnum"
+                            android:text="Giao dịch trên 10.000.000 VNĐ yêu cầu xác minh khuôn mặt eKYC"
+                            android:textColor="@color/phl_gold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.PHL.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_md"
+                        android:hint="Nội dung giao dịch">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Chuyen tien PHL Bank" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnContinueTransfer"
+                        style="@style/Widget.PHL.Button.Primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_lg"
+                        android:text="Tiếp tục xác nhận" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

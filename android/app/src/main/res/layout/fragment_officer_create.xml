@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/layoutCreateRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl">
+
+        <!-- Midnight Navy Executive Header -->
+        <LinearLayout
+            android:id="@+id/layoutCreateHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navy_hero"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_xl"
+            android:paddingEnd="@dimen/space_lg"
+            android:paddingStart="@dimen/space_lg"
+            android:paddingTop="@dimen/space_lg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="@dimen/avatar_size_md"
+                    android:layout_height="@dimen/avatar_size_md"
+                    android:background="@drawable/bg_navy_crest_circle">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_lg"
+                        android:layout_height="@dimen/icon_size_lg"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_phl_shield"
+                        app:tint="@color/phl_gold_light" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_md"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PHL PRIVATE BANKING · ONBOARDING" />
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Headline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xxs"
+                        android:text="Mở tài khoản Khách hàng"
+                        android:textColor="@color/phl_white" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCreateOfficerMeta"
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:fontFeatureSettings="tnum"
+                android:textColor="@color/phl_navy_on_dark_muted"
+                tools:text="Khởi tạo hồ sơ CIF &amp; tài khoản thanh toán · Officer" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hairline_height"
+                android:layout_marginTop="@dimen/space_base"
+                android:background="@drawable/bg_gold_hairline" />
+        </LinearLayout>
+
+        <!-- Animated Onboarding Confirmation Card (revealed on HTTP 201) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCreateSuccess"
+            style="@style/Widget.PHL.Card.GoldTint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="-16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space_base"
+                android:paddingEnd="@dimen/space_base"
+                android:paddingStart="@dimen/space_base"
+                android:paddingTop="@dimen/space_base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/ivCreateSuccessBadge"
+                        android:layout_width="@dimen/icon_badge_size"
+                        android:layout_height="@dimen/icon_badge_size"
+                        android:background="@drawable/bg_icon_circle_emerald">
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_md"
+                            android:layout_height="@dimen/icon_size_md"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check_verified"
+                            app:tint="@color/phl_emerald_dark" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_md"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Overline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="KHỞI TẠO THÀNH CÔNG"
+                            android:textColor="@color/phl_emerald_dark" />
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.CardTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_xxs"
+                            android:text="Hồ sơ CIF &amp; Tài khoản đã kích hoạt" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/hairline_height"
+                    android:layout_marginBottom="@dimen/space_md"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:background="@drawable/bg_gold_hairline" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCreatedCif"
+                        style="@style/TextAppearance.PHL.Pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill_navy"
+                        android:fontFeatureSettings="tnum"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_sm"
+                        android:paddingStart="@dimen/space_sm"
+                        android:paddingTop="@dimen/space_xs"
+                        android:textColor="@color/phl_navy"
+                        tools:text="CIF: CIF20260012" />
+
+                    <TextView
+                        android:id="@+id/tvCreatedAccountNo"
+                        style="@style/TextAppearance.PHL.Pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_sm"
+                        android:background="@drawable/bg_pill_emerald"
+                        android:fontFeatureSettings="tnum"
+                        android:paddingBottom="@dimen/space_xs"
+                        android:paddingEnd="@dimen/space_sm"
+                        android:paddingStart="@dimen/space_sm"
+                        android:paddingTop="@dimen/space_xs"
+                        android:textColor="@color/phl_emerald_dark"
+                        tools:text="STK: 190010001234" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:text="Số dư khởi tạo" />
+
+                <TextView
+                    android:id="@+id/tvCreatedDeposit"
+                    style="@style/TextAppearance.PHL.AmountLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xxs"
+                    android:fontFeatureSettings="tnum"
+                    tools:text="5.000.000 VNĐ" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Inline Error Banner -->
+        <TextView
+            android:id="@+id/tvCreateError"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_md"
+            android:background="@drawable/bg_error_banner"
+            android:paddingBottom="@dimen/space_sm"
+            android:paddingEnd="@dimen/space_md"
+            android:paddingStart="@dimen/space_md"
+            android:paddingTop="@dimen/space_sm"
+            android:textColor="@color/phl_danger"
+            android:visibility="gone" />
+
+        <!-- Section 1: Credentials -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSectionCredentials"
+            style="@style/Widget.PHL.Card.Elevated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space_base"
+                android:paddingEnd="@dimen/space_base"
+                android:paddingStart="@dimen/space_base"
+                android:paddingTop="@dimen/space_base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_sm"
+                        android:layout_height="@dimen/icon_size_sm"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_lock"
+                        app:tint="@color/phl_gold" />
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_sm"
+                        android:text="01 · THÔNG TIN ĐĂNG NHẬP" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewUsername"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Tên đăng nhập (tối thiểu 4 ký tự)">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewPassword"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Mật khẩu khởi tạo (tối thiểu 6 ký tự)"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:text="Phl@2026" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section 2: KYC Identity -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSectionKyc"
+            style="@style/Widget.PHL.Card.Elevated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_md">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space_base"
+                android:paddingEnd="@dimen/space_base"
+                android:paddingStart="@dimen/space_base"
+                android:paddingTop="@dimen/space_base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_sm"
+                        android:layout_height="@dimen/icon_size_sm"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/phl_gold" />
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_sm"
+                        android:text="02 · ĐỊNH DANH KHÁCH HÀNG (KYC)" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewFullName"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Họ và tên">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewIdCard"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="CCCD (12 chữ số)">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewIdCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewDob"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Ngày sinh (YYYY-MM-DD)"
+                    app:helperText="Định dạng chuẩn YYYY-MM-DD"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    app:startIconTint="@color/phl_navy">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewDob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:imeOptions="actionNext"
+                        android:inputType="date"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:text="2004-01-15" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewPhone"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Số điện thoại (tối thiểu 9 số)">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtNewPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLength="20"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Section 3: Initial Deposit -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSectionDeposit"
+            style="@style/Widget.PHL.Card.Elevated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_md">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/space_base"
+                android:paddingEnd="@dimen/space_base"
+                android:paddingStart="@dimen/space_base"
+                android:paddingTop="@dimen/space_base">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_sm"
+                        android:layout_height="@dimen/icon_size_sm"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_wallet"
+                        app:tint="@color/phl_gold" />
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_sm"
+                        android:text="03 · NGUỒN VỐN KHỞI TẠO" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilInitialDeposit"
+                    style="@style/Widget.PHL.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:hint="Số tiền nạp ban đầu (VNĐ)">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtInitialDeposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:text="5000000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutDepositPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:background="@drawable/bg_m4_diff_surface"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/space_sm"
+                    android:paddingEnd="@dimen/space_md"
+                    android:paddingStart="@dimen/space_md"
+                    android:paddingTop="@dimen/space_sm">
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Caption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Số tiền hiển thị" />
+
+                    <TextView
+                        android:id="@+id/tvInitialDepositPreview"
+                        style="@style/TextAppearance.PHL.Amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFeatureSettings="tnum"
+                        android:text="5.000.000 VNĐ"
+                        android:textColor="@color/phl_emerald"
+                        android:textSize="@dimen/text_title" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Actions -->
+        <LinearLayout
+            android:id="@+id/layoutCreateActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_lg"
+            android:orientation="vertical">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressCreateCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_md"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/phl_navy"
+                app:trackColor="@color/phl_navy_tint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCreateCustomer"
+                style="@style/Widget.PHL.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tạo hồ sơ &amp; Tài khoản" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

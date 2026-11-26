@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:orientation="vertical">
+
+    <!-- Midnight Navy Officer Identity Banner -->
+    <LinearLayout
+        android:id="@+id/layoutAuditHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_navy_hero"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl"
+        android:paddingEnd="@dimen/space_lg"
+        android:paddingStart="@dimen/space_lg"
+        android:paddingTop="@dimen/space_lg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/avatar_size_md"
+                android:layout_height="@dimen/avatar_size_md"
+                android:background="@drawable/bg_navy_crest_circle">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_lg"
+                    android:layout_height="@dimen/icon_size_lg"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_phl_shield"
+                    app:tint="@color/phl_gold_light" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_md"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PHL OFFICER PORTAL" />
+
+                <TextView
+                    android:id="@+id/tvOfficerFullName"
+                    style="@style/TextAppearance.PHL.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xxs"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/phl_white"
+                    tools:text="Trần Minh Quân" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvOfficerEmployeeCode"
+                        style="@style/TextAppearance.PHL.Pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill_navy_dark"
+                        android:fontFeatureSettings="tnum"
+                        android:paddingBottom="@dimen/space_xxs"
+                        android:paddingEnd="@dimen/space_sm"
+                        android:paddingStart="@dimen/space_sm"
+                        android:paddingTop="@dimen/space_xxs"
+                        android:textColor="@color/phl_gold_light"
+                        tools:text="EMP-PHL-001" />
+
+                    <TextView
+                        android:id="@+id/tvOfficerRoleBadge"
+                        style="@style/TextAppearance.PHL.Pill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_sm"
+                        android:background="@drawable/bg_pill_emerald"
+                        android:paddingBottom="@dimen/space_xxs"
+                        android:paddingEnd="@dimen/space_sm"
+                        android:paddingStart="@dimen/space_sm"
+                        android:paddingTop="@dimen/space_xxs"
+                        android:textColor="@color/phl_emerald_dark"
+                        tools:text="OFFICER" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hairline_height"
+            android:layout_marginTop="@dimen/space_base"
+            android:background="@drawable/bg_gold_hairline" />
+    </LinearLayout>
+
+    <!-- Overlapping Elevated Security Action Strip -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardOfficerActions"
+        style="@style/Widget.PHL.Card.Elevated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:layout_marginTop="-16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/space_md"
+            android:paddingEnd="@dimen/space_md"
+            android:paddingStart="@dimen/space_md"
+            android:paddingTop="@dimen/space_md">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOfficerChangePassword"
+                style="@style/Widget.PHL.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_weight="1"
+                android:text="@string/change_pw_title"
+                android:textSize="@dimen/text_body_sm"
+                app:icon="@drawable/ic_lock"
+                app:iconGravity="textStart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOfficerLogout"
+                style="@style/Widget.PHL.Button.Outlined.Danger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/action_logout"
+                android:textSize="@dimen/text_body_sm" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Timeline Section Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/space_sm"
+        android:paddingEnd="@dimen/space_base"
+        android:paddingStart="@dimen/space_base"
+        android:paddingTop="@dimen/space_base">
+
+        <TextView
+            style="@style/TextAppearance.PHL.SectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nhật ký Kiểm toán (AuditLog)" />
+
+        <TextView
+            android:id="@+id/tvAuditCountBadge"
+            style="@style/TextAppearance.PHL.Pill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_pill_navy"
+            android:fontFeatureSettings="tnum"
+            android:paddingBottom="@dimen/space_xs"
+            android:paddingEnd="@dimen/space_sm"
+            android:paddingStart="@dimen/space_sm"
+            android:paddingTop="@dimen/space_xs"
+            android:text="0 bản ghi"
+            android:textColor="@color/phl_navy" />
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressAuditLogs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/phl_navy"
+        app:trackColor="@color/phl_navy_tint" />
+
+    <!-- Empty / Error State -->
+    <LinearLayout
+        android:id="@+id/layoutAuditEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:layout_marginTop="@dimen/space_sm"
+        android:background="@drawable/bg_luxury_card"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl"
+        android:paddingEnd="@dimen/space_lg"
+        android:paddingStart="@dimen/space_lg"
+        android:paddingTop="@dimen/space_xl"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="@dimen/avatar_size_md"
+            android:layout_height="@dimen/avatar_size_md"
+            android:background="@drawable/bg_icon_circle_navy">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_lg"
+                android:layout_height="@dimen/icon_size_lg"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_audit"
+                app:tint="@color/phl_navy" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvAuditEmptyMessage"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_md"
+            android:gravity="center"
+            android:text="Chưa có dữ liệu nhật ký kiểm toán." />
+    </LinearLayout>
+
+    <!-- Scrollable Audit Timeline -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/space_base"
+        android:paddingEnd="@dimen/space_base"
+        android:paddingStart="@dimen/space_base"
+        android:paddingTop="@dimen/space_xs">
+
+        <LinearLayout
+            android:id="@+id/containerAuditLogs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

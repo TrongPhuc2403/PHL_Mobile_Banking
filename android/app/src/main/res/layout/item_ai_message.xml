@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/space_xs"
+    android:paddingTop="@dimen/space_xs">
+
+    <LinearLayout
+        android:id="@+id/layoutBubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chat_ai"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_sm"
+        android:paddingEnd="@dimen/space_md"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_sm">
+
+        <TextView
+            android:id="@+id/tvMessageSender"
+            style="@style/TextAppearance.PHL.Overline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TRỢ LÝ PHL"
+            android:textColor="@color/phl_gold" />
+
+        <TextView
+            android:id="@+id/tvMessageBody"
+            style="@style/TextAppearance.PHL.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:fontFeatureSettings="tnum"
+            android:maxWidth="280dp"
+            android:text="--" />
+    </LinearLayout>
+</LinearLayout>

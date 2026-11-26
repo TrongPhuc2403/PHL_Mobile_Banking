@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_off_customers"
+        android:icon="@drawable/ic_person"
+        android:title="@string/nav_off_customers" />
+    <item
+        android:id="@+id/tab_off_create"
+        android:icon="@drawable/ic_wallet"
+        android:title="@string/nav_off_create" />
+    <item
+        android:id="@+id/tab_off_rates"
+        android:icon="@drawable/ic_grid"
+        android:title="@string/nav_off_rates" />
+    <item
+        android:id="@+id/tab_off_audit"
+        android:icon="@drawable/ic_audit"
+        android:title="@string/nav_off_audit" />
+</menu>

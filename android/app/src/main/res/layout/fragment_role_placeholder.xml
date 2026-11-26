@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Midnight Navy Luxury Crest Header -->
+        <LinearLayout
+            android:id="@+id/layoutPlaceholderHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navy_hero"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_xl"
+            android:paddingEnd="@dimen/space_lg"
+            android:paddingStart="@dimen/space_lg"
+            android:paddingTop="@dimen/space_xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="@dimen/avatar_size_md"
+                    android:layout_height="@dimen/avatar_size_md"
+                    android:background="@drawable/bg_navy_crest_circle">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_lg"
+                        android:layout_height="@dimen/icon_size_lg"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_phl_shield"
+                        app:tint="@color/phl_gold_light" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_md"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/receipt_brand_header" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xxs"
+                        android:text="@string/splash_tagline"
+                        android:textColor="@color/phl_navy_on_dark_muted"
+                        android:textSize="@dimen/text_body_sm" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hairline_height"
+                android:layout_marginTop="@dimen/space_base"
+                android:background="@drawable/bg_gold_hairline" />
+        </LinearLayout>
+
+        <!-- Role Details Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPlaceholderBody"
+            style="@style/Widget.PHL.Card.Elevated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_lg"
+            android:layout_marginEnd="@dimen/space_base"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="-16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_lg">
+
+                <TextView
+                    android:id="@+id/tvTabRoleBadge"
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_emerald"
+                    android:paddingBottom="@dimen/space_xs"
+                    android:paddingEnd="@dimen/space_md"
+                    android:paddingStart="@dimen/space_md"
+                    android:paddingTop="@dimen/space_xs"
+                    android:text="CUSTOMER"
+                    android:textColor="@color/phl_emerald_dark" />
+
+                <TextView
+                    android:id="@+id/tvTabTitle"
+                    style="@style/TextAppearance.PHL.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_md"
+                    android:text="Màn hình chức năng" />
+
+                <TextView
+                    android:id="@+id/tvTabSummary"
+                    style="@style/TextAppearance.PHL.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_sm"
+                    android:textColor="@color/phl_text_secondary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTabLogout"
+                    style="@style/Widget.PHL.Button.Outlined.Danger"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_lg"
+                    android:text="@string/action_logout"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

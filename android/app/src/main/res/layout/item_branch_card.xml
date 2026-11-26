@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.PHL.Card.Tile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_sm">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_base">
+
+        <FrameLayout
+            android:layout_width="@dimen/icon_badge_size"
+            android:layout_height="@dimen/icon_badge_size"
+            android:background="@drawable/bg_icon_circle_navy">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_md"
+                android:layout_height="@dimen/icon_size_md"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_bank_branch"
+                app:tint="@color/phl_navy" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_md"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvBranchName"
+                style="@style/TextAppearance.PHL.CardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="PHL Branch" />
+
+            <TextView
+                android:id="@+id/tvBranchAddress"
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xxs"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Địa chỉ" />
+
+            <TextView
+                android:id="@+id/tvBranchPhone"
+                style="@style/TextAppearance.PHL.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:fontFeatureSettings="tnum"
+                android:text="Hotline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBranchDistance"
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_navy"
+                    android:fontFeatureSettings="tnum"
+                    android:paddingBottom="@dimen/space_xs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xs"
+                    android:text="0 m"
+                    android:textColor="@color/phl_navy" />
+
+                <TextView
+                    android:id="@+id/tvBranchWalkTime"
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_sm"
+                    android:background="@drawable/bg_pill_emerald"
+                    android:fontFeatureSettings="tnum"
+                    android:paddingBottom="@dimen/space_xs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xs"
+                    android:text="0 phút đi bộ"
+                    android:textColor="@color/phl_emerald_dark" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

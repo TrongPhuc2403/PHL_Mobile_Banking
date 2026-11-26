@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl">
+
+        <!-- Midnight Navy Portfolio Header -->
+        <LinearLayout
+            android:id="@+id/layoutAccountsHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navy_hero"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/space_lg"
+            android:paddingTop="@dimen/space_xl"
+            android:paddingEnd="@dimen/space_lg"
+            android:paddingBottom="@dimen/space_xl">
+
+            <TextView
+                style="@style/TextAppearance.PHL.Overline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PHL WEALTH PORTFOLIO"
+                android:textColor="@color/phl_gold_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xxs"
+                android:text="Danh mục Tài khoản &amp; Khoản vay"
+                android:textColor="@color/phl_white"
+                android:textSize="@dimen/text_headline"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hairline_height"
+                android:layout_marginTop="@dimen/space_md"
+                android:background="@drawable/bg_gold_hairline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng số dư tiền gửi"
+                        android:textColor="@color/phl_navy_on_dark_muted"
+                        android:textSize="@dimen/text_body_sm" />
+
+                    <TextView
+                        android:id="@+id/tvAccountsTotalBalance"
+                        style="@style/TextAppearance.PHL.Amount.Hero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xxs"
+                        android:fontFeatureSettings="tnum"
+                        android:text="0 VNĐ" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvAccountsCountBadge"
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_navy_dark"
+                    android:fontFeatureSettings="tnum"
+                    android:paddingStart="@dimen/space_md"
+                    android:paddingTop="@dimen/space_xs"
+                    android:paddingEnd="@dimen/space_md"
+                    android:paddingBottom="@dimen/space_xs"
+                    android:text="0 tài khoản"
+                    android:textColor="@color/phl_gold_light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_navy_dark"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xxs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingBottom="@dimen/space_xxs"
+                    android:text="Thanh toán"
+                    android:textColor="@color/phl_navy_on_dark_muted" />
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_xs"
+                    android:background="@drawable/bg_pill_navy_dark"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xxs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingBottom="@dimen/space_xxs"
+                    android:text="Tiết kiệm"
+                    android:textColor="@color/phl_emerald_stroke" />
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_xs"
+                    android:background="@drawable/bg_pill_navy_dark"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xxs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingBottom="@dimen/space_xxs"
+                    android:text="Thế chấp"
+                    android:textColor="@color/phl_gold_light" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAccountsEmpty"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_base"
+            android:layout_marginTop="@dimen/space_base"
+            android:layout_marginEnd="@dimen/space_base"
+            android:background="@drawable/bg_luxury_card"
+            android:gravity="center"
+            android:padding="@dimen/space_xl"
+            android:text="Chưa có tài khoản nào được ghi nhận"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/containerAccounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_base" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

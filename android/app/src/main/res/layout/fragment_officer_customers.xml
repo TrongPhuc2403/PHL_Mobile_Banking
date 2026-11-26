@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:orientation="vertical">
+
+    <!-- Midnight Navy Hero Header -->
+    <LinearLayout
+        android:id="@+id/layoutCustomersHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_navy_hero"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl"
+        android:paddingEnd="@dimen/space_lg"
+        android:paddingStart="@dimen/space_lg"
+        android:paddingTop="@dimen/space_lg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="@dimen/avatar_size_md"
+                android:layout_height="@dimen/avatar_size_md"
+                android:background="@drawable/bg_navy_crest_circle">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_lg"
+                    android:layout_height="@dimen/icon_size_lg"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_phl_shield"
+                    app:tint="@color/phl_gold_light" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_marginStart="@dimen/space_md"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Overline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PHL OFFICER PORTAL" />
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xxs"
+                    android:text="Quản lý Khách hàng"
+                    android:textColor="@color/phl_white" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCustomerCountBadge"
+                style="@style/TextAppearance.PHL.Pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill_navy_dark"
+                android:fontFeatureSettings="tnum"
+                android:paddingBottom="@dimen/space_xs"
+                android:paddingEnd="@dimen/space_md"
+                android:paddingStart="@dimen/space_md"
+                android:paddingTop="@dimen/space_xs"
+                android:text="0 hồ sơ"
+                android:textColor="@color/phl_gold_light" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:text="Tra cứu hồ sơ CIF, cập nhật liên hệ &amp; kiểm soát trạng thái"
+            android:textColor="@color/phl_navy_on_dark_muted" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hairline_height"
+            android:layout_marginTop="@dimen/space_base"
+            android:background="@drawable/bg_gold_hairline" />
+    </LinearLayout>
+
+    <!-- Overlapping Elevated Search Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCustomerSearch"
+        style="@style/Widget.PHL.Card.Elevated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:layout_marginTop="-16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/space_md"
+            android:paddingEnd="@dimen/space_md"
+            android:paddingStart="@dimen/space_md"
+            android:paddingTop="@dimen/space_md">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.PHL.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_weight="1"
+                android:hint="Tìm CIF, họ tên, SĐT, CCCD"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="@color/phl_navy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSearchCustomer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSearchCustomer"
+                style="@style/Widget.PHL.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/btn_height_secondary"
+                android:text="Tìm" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressCustomers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:layout_marginTop="@dimen/space_sm"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/phl_navy"
+        app:trackColor="@color/phl_navy_tint" />
+
+    <TextView
+        android:id="@+id/tvCustomersLoadingHint"
+        style="@style/TextAppearance.PHL.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_xs"
+        android:text="Đang đồng bộ danh sách khách hàng..."
+        android:visibility="gone" />
+
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/layoutCustomersEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_base"
+        android:layout_marginStart="@dimen/space_base"
+        android:layout_marginTop="@dimen/space_base"
+        android:background="@drawable/bg_luxury_card"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_xl"
+        android:paddingEnd="@dimen/space_lg"
+        android:paddingStart="@dimen/space_lg"
+        android:paddingTop="@dimen/space_xl"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="@dimen/avatar_size_md"
+            android:layout_height="@dimen/avatar_size_md"
+            android:background="@drawable/bg_icon_circle_navy">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_lg"
+                android:layout_height="@dimen/icon_size_lg"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_person"
+                app:tint="@color/phl_navy" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvCustomersEmptyMessage"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_md"
+            android:gravity="center"
+            android:text="Không tìm thấy hồ sơ khách hàng phù hợp."
+            tools:text="Không tìm thấy hồ sơ khách hàng phù hợp." />
+    </LinearLayout>
+
+    <!-- Scrollable Customer List -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_md"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/space_base"
+        android:paddingEnd="@dimen/space_base"
+        android:paddingStart="@dimen/space_base">
+
+        <LinearLayout
+            android:id="@+id/containerCustomers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

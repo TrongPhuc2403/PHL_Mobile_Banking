@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_navy_hero"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarEkyc"
+        style="@style/Widget.PHL.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/phl_transparent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/phl_white"
+        app:title="Xác minh sinh trắc học eKYC"
+        app:titleTextColor="@color/phl_white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hairline_height"
+        android:background="@drawable/bg_gold_hairline" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/space_lg">
+
+        <LinearLayout
+            android:id="@+id/badgeEkycStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_pill_navy_dark"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/space_xs"
+            android:paddingEnd="@dimen/space_md"
+            android:paddingStart="@dimen/space_md"
+            android:paddingTop="@dimen/space_xs">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_sm"
+                android:layout_height="@dimen/icon_size_sm"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_phl_shield"
+                app:tint="@color/phl_gold_light" />
+
+            <TextView
+                style="@style/TextAppearance.PHL.Pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_xs"
+                android:text="BẢO MẬT SINH TRẮC HỌC PHL"
+                android:textColor="@color/phl_gold_light" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvEkycInstruction"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:gravity="center"
+            android:text="Đặt khuôn mặt vào khung hình oval để xác thực giao dịch giá trị cao."
+            android:textColor="@color/phl_navy_on_dark_muted" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEkycChamber"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_base"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/phl_navy_deep"
+            app:cardCornerRadius="@dimen/radius_xl"
+            app:cardElevation="@dimen/elevation_raised"
+            app:strokeColor="@color/phl_navy_border_dark"
+            app:strokeWidth="@dimen/stroke_medium">
+
+            <FrameLayout
+                android:id="@+id/layoutEkycCameraFrame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/phl_navy_deep">
+
+                <androidx.camera.view.PreviewView
+                    android:id="@+id/previewCameraEkyc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:implementationMode="compatible"
+                    app:scaleType="fitCenter" />
+
+                <FrameLayout
+                    android:id="@+id/layoutEkycScanRegion"
+                    android:layout_width="220dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center">
+
+                    <View
+                        android:id="@+id/viewEkycReticle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_ekyc_reticle" />
+
+                    <View
+                        android:id="@+id/viewEkycScanline"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_gravity="top"
+                        android:background="@drawable/bg_ekyc_scanline" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvCameraFallback"
+                    style="@style/TextAppearance.PHL.BodySecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/phl_ekyc_overlay"
+                    android:gravity="center"
+                    android:padding="@dimen/space_lg"
+                    android:text="Đang khởi tạo Camera trước..."
+                    android:textColor="@color/phl_navy_on_dark_muted" />
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/layoutCapturedFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/imgCapturedFrame"
+                android:layout_width="88dp"
+                android:layout_height="112dp"
+                android:contentDescription="Ảnh thật vừa chụp để gửi kiểm tra, không phải khung xem trước"
+                android:scaleType="fitCenter" />
+            <TextView
+                android:id="@+id/tvCapturedFrameStatus"
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/space_sm"
+                android:textColor="@color/phl_white"
+                android:accessibilityLiveRegion="polite" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetakeEkyc"
+                style="@style/Widget.PHL.Button.Text.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chụp lại" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressEkycVerify"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_sm"
+            android:indeterminateTint="@color/phl_gold_light"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCaptureVerifyFace"
+            style="@style/Widget.PHL.Button.Gold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_base"
+            android:text="Chụp &amp; Xác minh khuôn mặt"
+            app:icon="@drawable/ic_check_verified"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/space_sm"
+            app:iconTint="@color/phl_white" />
+    </LinearLayout>
+</LinearLayout>

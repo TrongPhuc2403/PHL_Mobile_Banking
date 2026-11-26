@@ -1,0 +1,333 @@
+{
+  "info": {
+    "name": "PHL Mobile Banking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Local educational banking API. eKYC requires actual CameraX photos and a customer self-enrolled (password + enrollment OTP) or officer-assisted reference. No constant OTP or timestamp verification. See docs/ekyc-testing.md. Do not run transfers against real funds."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "idempotencyKey",
+      "value": "replace-with-new-unique-key"
+    },
+    {
+      "key": "otp",
+      "value": ""
+    },
+    {
+      "key": "challengeId",
+      "value": ""
+    },
+    {
+      "key": "ekycToken",
+      "value": ""
+    },
+    {
+      "key": "enrollmentRequestId",
+      "value": ""
+    },
+    {
+      "key": "enrollmentToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"phuc.customer\",\n  \"password\": \"Phl@2026\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Accounts - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/accounts"
+      }
+    },
+    {
+      "name": "Security - Request OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/otp/request",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"otpType\": \"TRANSACTION\",\n  \"intent\": {\n    \"operation\": \"INTERNAL\",\n    \"fromAccountNumber\": \"52400028\",\n    \"toAccountNumber\": \"52400114\",\n    \"amount\": 500000,\n    \"content\": \"Chuyen khoan test\",\n    \"idempotencyKey\": \"{{idempotencyKey}}\"\n  }\n}"
+        },
+        "description": "For >10M, complete eKYC with the identical intent then include ekycToken. OTP is dynamic, never use a constant."
+      }
+    },
+    {
+      "name": "Transaction - Internal Transfer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/transactions/internal-transfer",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromAccountNumber\": \"52400028\",\n  \"toAccountNumber\": \"52400114\",\n  \"amount\": 500000,\n  \"content\": \"Chuyen khoan test\",\n  \"idempotencyKey\": \"{{idempotencyKey}}\",\n  \"otpCode\": \"{{otp}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Hub - Branches & Walking Route",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/hub/branches?lat=10.7315&lng=106.6980"
+      }
+    },
+    {
+      "name": "Hub - AI Chatbot",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/hub/ai/chat",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"Tôi muốn chuyển tiền cho bạn\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Officer - Audit Logs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/officer/audit-logs"
+      }
+    },
+    {
+      "name": "Security - eKYC Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/status"
+      }
+    },
+    {
+      "name": "Security - eKYC Challenge (same transaction intent)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/challenge",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"intent\": {\n    \"operation\": \"INTERNAL\",\n    \"fromAccountNumber\": \"52400028\",\n    \"toAccountNumber\": \"52400114\",\n    \"amount\": 500000,\n    \"content\": \"Chuyen khoan test\",\n    \"idempotencyKey\": \"{{idempotencyKey}}\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Security - eKYC Verify (real photos required)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/verify",
+        "description": "Use the Android CameraX screen; placeholders are intentionally invalid. Never substitute a fabricated timestamp. For high-value transfer set the same amount and fields in challenge, verification, OTP and transfer.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"challengeId\": \"{{challengeId}}\",\n  \"imageBase64\": \"REQUIRES_REAL_JPEG_BASE64\",\n  \"motionImageBase64\": \"REQUIRES_SECOND_LIVE_CAPTURE\",\n  \"intent\": {\n    \"operation\": \"INTERNAL\",\n    \"fromAccountNumber\": \"52400028\",\n    \"toAccountNumber\": \"52400114\",\n    \"amount\": 500000,\n    \"content\": \"Chuyen khoan test\",\n    \"idempotencyKey\": \"{{idempotencyKey}}\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Enrollment - Verify password & request registration OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/enrollment/request-otp",
+        "description": "Authenticated CUSTOMER, own first-time enrollment only; no customerId accepted. No transaction grant is issued.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"currentPassword\": \"ENTER_CURRENT_PASSWORD\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Enrollment - Confirm registration OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/enrollment/confirm-otp",
+        "description": "Authenticated CUSTOMER, own first-time enrollment only; no customerId accepted. No transaction grant is issued.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestId\": \"{{enrollmentRequestId}}\",\n  \"otpCode\": \"{{otp}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Enrollment - Create own capture challenge",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/enrollment/challenge",
+        "description": "Authenticated CUSTOMER, own first-time enrollment only; no customerId accepted. No transaction grant is issued.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"enrollmentToken\": \"{{enrollmentToken}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Enrollment - Save own first reference (real camera captures)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/security/ekyc/enrollment",
+        "description": "Authenticated CUSTOMER, own first-time enrollment only; no customerId accepted. No transaction grant is issued.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"enrollmentToken\": \"{{enrollmentToken}}\",\n  \"challengeId\": \"{{challengeId}}\",\n  \"consent\": true,\n  \"imageBase64\": \"REQUIRES_REAL_JPEG_BASE64\",\n  \"motionImageBase64\": \"REQUIRES_SECOND_LIVE_CAPTURE\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Security - Check captured frame quality (NOT verification)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/security/ekyc/frame/check",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Requires a current owned capture challenge. Checks one real JPEG for face count/quality/orientation only; no reference write, enrollment or transaction grant. Final enroll/verify still validates both photos.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"challengeId\": \"{{challengeId}}\",\n  \"imageBase64\": \"REQUIRES_REAL_JPEG_BASE64\",\n  \"frameIndex\": 1\n}"
+        }
+      }
+    }
+  ]
+}

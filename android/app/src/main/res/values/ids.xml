@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="phl_tag_counter_anim" type="id" />
+    <item name="phl_tag_shimmer_anim" type="id" />
+    <item name="phl_tag_shimmer_active" type="id" />
+    <item name="phl_tag_pulse_anim" type="id" />
+    <item name="phl_tag_scanline_anim" type="id" />
+    <item name="phl_tag_scanline_active" type="id" />
+    <item name="phl_tag_flip_anim" type="id" />
+    <item name="phl_tag_shake_anim" type="id" />
+    <item name="phl_tag_attach_listener" type="id" />
+    <item name="phl_tag_tactile_bound" type="id" />
+</resources>

@@ -1,6 +1,6 @@
 # Phạm vi nghiệp vụ
 
-`FinalProject_2026_2027.pdf` là đề bài chính thức và xác định bảy nhóm yêu cầu. `PHL_Banking_App.docx` chi tiết hóa các yêu cầu thành 33 use case và bổ sung những luồng riêng của PHL. `Mô tả hệ thống và phân công nhiệm vụ.docx` diễn giải đề bài và ghi nhận phân công trong nhóm.
+FinalProject_2026_2027.pdf (tài liệu nhóm cung cấp riêng) là đề bài chính thức và xác định bảy nhóm yêu cầu. PHL_Banking_App.docx (tài liệu nhóm cung cấp riêng) chi tiết hóa các yêu cầu thành 33 use case và bổ sung những luồng riêng của PHL. Mô tả hệ thống và phân công nhiệm vụ.docx (tài liệu nhóm cung cấp riêng) diễn giải đề bài và ghi nhận phân công trong nhóm.
 
 ## Đối chiếu với đề bài
 
@@ -62,3 +62,13 @@ UC-NOTI-01 là phần thông báo bổ sung trong đặc tả PHL.
 - Chuyển tiền nội bộ phải hạch toán cả hai phía trong một giao dịch cơ sở dữ liệu. Yêu cầu gửi lại với cùng khóa idempotency phải trả về cùng giao dịch và chỉ hạch toán một lần.
 - Hiển thị tuyến đi bộ ngắn nhất tới chi nhánh gần nhất dựa trên mạng lưới đường.
 - Chatbot trả lời và đưa nút mở chức năng tương ứng. Người dùng xác nhận và thực hiện giao dịch trong luồng ngân hàng.
+
+
+## Bổ sung sau rà soát eKYC
+
+- Khách hàng có thể tự đăng ký ảnh gốc thật tại Cá nhân sau xác nhận mật khẩu + OTP, hoặc nhờ nhân viên hỗ trợ; cả hai đều cần đồng ý chụp/lưu và Audit Log. Vector mô phỏng không hợp lệ.
+- Giao dịch trên 10 triệu phải đối chiếu ảnh gốc **trước khi phát OTP**; backend chặn cả khi gọi API trực tiếp. Áp dụng cả nạp/rút và tiện ích, không chỉ chuyển nội bộ.
+- Kiểm tra hai tư thế OpenCV trong bản đồ án **chưa đáp ứng liveness/PAD được chứng nhận**, vì vậy chưa được chốt toàn bộ yêu cầu sinh trắc/production hoàn tất.
+- OTP giao dịch mặc định 120 giây, gắn context; giao nhận SMS/2FA thực tế vẫn là phần chưa tích hợp.
+
+Hướng dẫn/bằng chứng và giới hạn: [ekyc-testing.md](ekyc-testing.md), [README.md](../README.md).

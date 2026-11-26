@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PHLBanking" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/phl_navy</item>
+        <item name="colorOnPrimary">@color/phl_white</item>
+        <item name="colorPrimaryContainer">@color/phl_navy_tint</item>
+        <item name="colorOnPrimaryContainer">@color/phl_navy</item>
+
+        <item name="colorSecondary">@color/phl_emerald</item>
+        <item name="colorOnSecondary">@color/phl_white</item>
+        <item name="colorSecondaryContainer">@color/phl_emerald_tint</item>
+        <item name="colorOnSecondaryContainer">@color/phl_emerald_dark</item>
+
+        <item name="colorTertiary">@color/phl_gold</item>
+        <item name="colorOnTertiary">@color/phl_white</item>
+        <item name="colorTertiaryContainer">@color/phl_gold_tint</item>
+        <item name="colorOnTertiaryContainer">@color/phl_gold</item>
+
+        <item name="android:colorBackground">@color/phl_bg</item>
+        <item name="colorSurface">@color/phl_surface</item>
+        <item name="colorOnSurface">@color/phl_text_primary</item>
+        <item name="colorSurfaceVariant">@color/phl_surface_subtle</item>
+        <item name="colorOnSurfaceVariant">@color/phl_text_secondary</item>
+        <item name="colorSurfaceContainerLowest">@color/phl_surface</item>
+        <item name="colorSurfaceContainerLow">@color/phl_surface</item>
+        <item name="colorSurfaceContainer">@color/phl_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/phl_surface_subtle</item>
+        <item name="colorOutline">@color/phl_border</item>
+        <item name="colorOutlineVariant">@color/phl_divider</item>
+
+        <item name="colorError">@color/phl_danger</item>
+        <item name="colorOnError">@color/phl_white</item>
+        <item name="colorErrorContainer">@color/phl_danger_tint</item>
+        <item name="colorOnErrorContainer">@color/phl_danger</item>
+
+        <item name="colorControlHighlight">@color/phl_ripple_light</item>
+        <item name="android:statusBarColor">@color/phl_navy</item>
+        <item name="android:navigationBarColor">@color/phl_surface</item>
+
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.PHL.BottomSheetDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.PHL.AlertDialog</item>
+    </style>
+
+    <style name="ThemeOverlay.PHL.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.PHL.BottomSheet.Modal</item>
+        <item name="colorSurface">@color/phl_surface</item>
+        <item name="colorSurfaceContainerLow">@color/phl_surface</item>
+    </style>
+
+    <style name="ThemeOverlay.PHL.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/phl_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/phl_surface</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.PHL.Dialog</item>
+    </style>
+</resources>

@@ -33,3 +33,21 @@ google-services.json
 *service-account*.json
 *.pem
 *.p12
+
+# Private biometric portraits and local Python caches
+backend/.data/
+__pycache__/
+*.pyc
+
+# Generated verification output and downloaded public model weights
+android/e2e_verify/reports/
+backend/face_engine/models/*.onnx
+
+# Python development environments and coverage
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage/

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phl_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layoutUtilitiesHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navy_hero"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_lg"
+            android:paddingEnd="@dimen/space_lg"
+            android:paddingStart="@dimen/space_lg"
+            android:paddingTop="@dimen/space_xl">
+
+            <TextView
+                style="@style/TextAppearance.PHL.Overline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PHL CONCIERGE SERVICES" />
+
+            <TextView
+                style="@style/TextAppearance.PHL.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="Dịch vụ Tiện ích"
+                android:textColor="@color/phl_white" />
+
+            <TextView
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="Thanh toán hóa đơn và đặt dịch vụ tức thì từ tài khoản thanh toán"
+                android:textColor="@color/phl_navy_on_dark_muted" />
+
+            <TextView
+                android:id="@+id/tvUtilitiesCheckingPill"
+                style="@style/TextAppearance.PHL.Pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:background="@drawable/bg_pill_navy_dark"
+                android:fontFeatureSettings="tnum"
+                android:paddingBottom="@dimen/space_xs"
+                android:paddingEnd="@dimen/space_md"
+                android:paddingStart="@dimen/space_md"
+                android:paddingTop="@dimen/space_xs"
+                android:text="TK Thanh toán: 52400028"
+                android:textColor="@color/phl_gold_light" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/hairline_height"
+            android:background="@drawable/bg_gold_hairline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_base">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_md"
+                android:background="@drawable/bg_luxury_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_md">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.Overline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PHL PRIVATE PRIVILEGE"
+                        android:textColor="@color/phl_gold" />
+
+                    <TextView
+                        style="@style/TextAppearance.PHL.BodySecondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xxs"
+                        android:text="Miễn 100% phí thanh toán hóa đơn &amp; xử lý tức thì 24/7" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextAppearance.PHL.Pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_sm"
+                    android:background="@drawable/bg_pill_gold"
+                    android:paddingStart="@dimen/space_sm"
+                    android:paddingTop="@dimen/space_xxs"
+                    android:paddingEnd="@dimen/space_sm"
+                    android:paddingBottom="@dimen/space_xxs"
+                    android:text="0% PHÍ"
+                    android:textColor="@color/phl_gold" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextAppearance.PHL.SectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Danh mục dịch vụ" />
+
+            <GridLayout
+                android:id="@+id/gridUtilities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:columnCount="2"
+                android:useDefaultMargins="false" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

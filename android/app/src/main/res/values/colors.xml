@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Private Banking Palette -->
+    <color name="phl_navy">#0F1E36</color>
+    <color name="phl_navy_dark">#091324</color>
+    <color name="phl_navy_soft">#1B2F52</color>
+
+    <!-- Brand Accents -->
+    <color name="phl_emerald">#0E9F6E</color>
+    <color name="phl_emerald_tint">#ECFDF5</color>
+    <color name="phl_gold">#B8860B</color>
+    <color name="phl_gold_soft">#C59B27</color>
+
+    <!-- Surfaces & Borders -->
+    <color name="phl_bg">#F5F7FA</color>
+    <color name="phl_surface">#FFFFFF</color>
+    <color name="phl_border">#E4E8F0</color>
+
+    <!-- Typography -->
+    <color name="phl_text_primary">#101828</color>
+    <color name="phl_text_secondary">#475467</color>
+    <color name="phl_text_muted">#667085</color>
+    <color name="phl_white">#FFFFFF</color>
+
+    <!-- Semantic Status -->
+    <color name="phl_danger">#D92D20</color>
+    <color name="phl_danger_tint">#FEF3F2</color>
+    <color name="phl_warning">#D97706</color>
+
+    <!-- Extended Luxury Navy Spectrum -->
+    <color name="phl_navy_deep">#060D1A</color>
+    <color name="phl_navy_tint">#EDF2F9</color>
+    <color name="phl_navy_on_dark_muted">#B8C4D9</color>
+    <color name="phl_navy_on_dark_subtle">#8FA3C4</color>
+    <color name="phl_navy_border_dark">#243B63</color>
+
+    <!-- Extended Champagne Gold Spectrum -->
+    <color name="phl_gold_light">#E6C667</color>
+    <color name="phl_gold_tint">#FDF8EB</color>
+    <color name="phl_gold_stroke">#E6D39A</color>
+
+    <!-- Extended Semantic & Status Tokens -->
+    <color name="phl_emerald_dark">#077A54</color>
+    <color name="phl_emerald_stroke">#A7F3D0</color>
+    <color name="phl_warning_tint">#FEF3C7</color>
+    <color name="phl_danger_stroke">#FECDCA</color>
+    <color name="phl_info">#1D4ED8</color>
+    <color name="phl_info_tint">#EFF6FF</color>
+
+    <!-- Surfaces, Dividers, Shimmer & Overlays -->
+    <color name="phl_surface_elevated">#FCFDFF</color>
+    <color name="phl_surface_subtle">#F8FAFC</color>
+    <color name="phl_divider">#EAECF0</color>
+    <color name="phl_border_strong">#CBD5E1</color>
+    <color name="phl_shimmer_highlight">#38FFFFFF</color>
+    <color name="phl_shimmer_gold">#40E6C667</color>
+    <color name="phl_scrim_dark">#CC091324</color>
+    <color name="phl_ekyc_overlay">#99060D1A</color>
+    <color name="phl_nav_indicator">#140F1E36</color>
+    <color name="phl_ripple_light">#1A0F1E36</color>
+    <color name="phl_ripple_dark">#26FFFFFF</color>
+    <color name="phl_transparent">#00000000</color>
+</resources>
