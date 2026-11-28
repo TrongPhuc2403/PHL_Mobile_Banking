@@ -48,9 +48,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void requestOtp() {
         String username = textOf(binding.edtForgotUser);
-        if (username.isEmpty()) {
-            String msg = "Vui lòng nhập tên đăng nhập";
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        String idCardNumber = textOf(binding.edtForgotIdCard);
+        if (username.isEmpty() || !idCardNumber.matches("[0-9]{12}")) {
+            String msg = username.isEmpty()
+                ? "Vui lòng nhập tên đăng nhập"
+                : "CCCD phải gồm đúng 12 chữ số";
+            showToast(msg, Toast.LENGTH_SHORT);
             showFeedbackError(msg);
             MotionHelper.shakeError(binding.cardForgotStep1);
             return;
@@ -60,8 +63,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         Map<String, String> body = new HashMap<>();
         body.put("username", username);
+        body.put("idCardNumber", idCardNumber);
 
-        ApiClient.authApi(this).requestForgotOtp(body).enqueue(
+        ApiClient.authApi(getApplicationContext()).requestForgotOtp(body).enqueue(
             new Callback<ApiResponse<Map<String, Object>>>() {
                 @Override
                 public void onResponse(
@@ -77,17 +81,34 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         response.body() != null &&
                         response.body().data != null
                     ) {
-                        Object preview = response.body().data.get("devOtpPreview");
-                        String msg =
-                            preview != null
-                                ? "Đã gửi OTP (Dev preview: " + preview + ")"
+                        Map<String, Object> data = response.body().data;
+                        Object preview = null;
+                        for (String key : new String[] {"debugOtp", "otpCode", "otp", "devOtpPreview"}) {
+                            if (data.containsKey(key) && data.get(key) != null) {
+                                preview = data.get(key);
+                                break;
+                            }
+                        }
+                        String serverMessage = response.body().message;
+                        Object expiresIn = data.get("expiresInSeconds");
+                        String msg;
+                        if (preview != null) {
+                            msg = "Đã gửi OTP thành công (Dev preview: " + preview + ")";
+                            if (expiresIn != null) {
+                                msg += " · Hết hạn sau " + expiresIn + " giây";
+                            }
+                        } else {
+                            msg = serverMessage != null && !serverMessage.trim().isEmpty()
+                                ? serverMessage
                                 : "Đã gửi mã OTP về số điện thoại đăng ký";
-                        Toast.makeText(ForgotPasswordActivity.this, msg, Toast.LENGTH_LONG).show();
-                        showFeedbackSuccess(msg);
+                        }
+                        binding.tvOtpBanner.setText(msg);
+                        binding.tvOtpBanner.setVisibility(View.VISIBLE);
+                        showToast(msg, Toast.LENGTH_LONG);
                         advanceToResetStep();
                     } else {
                         String err = "Không tìm thấy tài khoản khách hàng";
-                        Toast.makeText(ForgotPasswordActivity.this, err, Toast.LENGTH_SHORT).show();
+                        showToast(err, Toast.LENGTH_SHORT);
                         showFeedbackError(err);
                         MotionHelper.shakeError(binding.cardForgotStep1);
                     }
@@ -103,7 +124,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     }
                     setOtpLoading(false);
                     String err = "Lỗi kết nối máy chủ";
-                    Toast.makeText(ForgotPasswordActivity.this, err, Toast.LENGTH_SHORT).show();
+                    showToast(err, Toast.LENGTH_SHORT);
                     showFeedbackError(err);
                     MotionHelper.shakeError(binding.cardForgotStep1);
                 }
@@ -116,9 +137,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         String otp = textOf(binding.edtForgotOtp);
         String newPass = textOf(binding.edtForgotNewPass);
 
-        if (username.isEmpty() || otp.length() != 6 || newPass.length() < 6) {
-            String msg = "Nhập đủ tên đăng nhập, OTP 6 số và mật khẩu >= 6 ký tự";
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        boolean strongPassword = newPass.length() >= 8 && newPass.length() <= 20
+            && newPass.matches("[\\x21-\\x7E]+")
+            && newPass.matches(".*[A-Z].*")
+            && newPass.matches(".*[a-z].*")
+            && newPass.matches(".*[0-9].*")
+            && newPass.matches(".*[^A-Za-z0-9].*");
+        if (username.isEmpty() || otp.length() != 6 || !otp.matches("[0-9]{6}") || !strongPassword) {
+            String msg = "Nhập tên đăng nhập, OTP 6 số và mật khẩu 8–20 ký tự gồm chữ hoa, chữ thường, số và ký tự đặc biệt";
+            showToast(msg, Toast.LENGTH_SHORT);
             showFeedbackError(msg);
             MotionHelper.shakeError(binding.cardForgotStep2);
             return;
@@ -143,16 +170,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     }
                     setResetLoading(false);
                     if (response.isSuccessful()) {
-                        Toast.makeText(
-                            ForgotPasswordActivity.this,
-                            "Đặt lại mật khẩu thành công",
-                            Toast.LENGTH_SHORT
-                        ).show();
+                    showToast("Đặt lại mật khẩu thành công", Toast.LENGTH_SHORT);
                         finish();
                         MotionHelper.applyActivityTransition(ForgotPasswordActivity.this);
                     } else {
                         String err = "OTP không hợp lệ hoặc đã hết hạn";
-                        Toast.makeText(ForgotPasswordActivity.this, err, Toast.LENGTH_SHORT).show();
+                        showToast(err, Toast.LENGTH_SHORT);
                         showFeedbackError(err);
                         MotionHelper.shakeError(binding.cardForgotStep2);
                     }
@@ -165,12 +188,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     }
                     setResetLoading(false);
                     String err = "Lỗi kết nối máy chủ";
-                    Toast.makeText(ForgotPasswordActivity.this, err, Toast.LENGTH_SHORT).show();
+                    showToast(err, Toast.LENGTH_SHORT);
                     showFeedbackError(err);
                     MotionHelper.shakeError(binding.cardForgotStep2);
                 }
             }
         );
+    }
+
+    private void showToast(String message, int duration) {
+        Toast.makeText(getApplicationContext(), message, duration).show();
     }
 
     private void advanceToResetStep() {

@@ -38,12 +38,12 @@
     <string name="change_pw_title">Đổi mật khẩu</string>
     <string name="change_pw_subtitle">Cập nhật mật khẩu bảo vệ tài khoản PHL Bank</string>
     <string name="change_pw_current">Mật khẩu hiện tại</string>
-    <string name="change_pw_new">Mật khẩu mới (tối thiểu 6 ký tự)</string>
+    <string name="change_pw_new">Mật khẩu mới (8–20 ký tự)</string>
     <string name="change_pw_confirm">Nhập lại mật khẩu mới</string>
     <string name="change_pw_submit">Xác nhận</string>
     <string name="change_pw_cancel">Hủy</string>
     <string name="change_pw_err_empty">Vui lòng nhập mật khẩu hiện tại</string>
-    <string name="change_pw_err_length">Mật khẩu mới phải có ít nhất 6 ký tự</string>
+    <string name="change_pw_err_length">Mật khẩu mới phải có 8–20 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt</string>
     <string name="change_pw_err_mismatch">Xác nhận mật khẩu mới không khớp</string>
     <string name="change_pw_err_current">Mật khẩu hiện tại không đúng</string>
     <string name="change_pw_success">Đổi mật khẩu thành công</string>

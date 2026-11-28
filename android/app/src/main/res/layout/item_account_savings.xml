@@ -113,6 +113,14 @@
                     android:text="0 VNĐ" />
 
                 <TextView
+                    android:id="@+id/tvSavingsMaturity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:textColor="@color/phl_navy_on_dark_muted"
+                    android:textSize="@dimen/text_body_sm" />
+
+                <TextView
                     android:id="@+id/tvSavingsAccrued"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

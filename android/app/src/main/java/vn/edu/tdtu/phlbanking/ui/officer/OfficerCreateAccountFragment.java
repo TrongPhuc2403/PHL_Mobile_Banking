@@ -149,11 +149,16 @@ public class OfficerCreateAccountFragment extends Fragment {
             );
             return;
         }
-        if (password.length() < 6) {
+        if (password.length() < 8 || password.length() > 20
+            || !password.matches("[\\x21-\\x7E]+")
+            || !password.matches(".*[A-Z].*")
+            || !password.matches(".*[a-z].*")
+            || !password.matches(".*[0-9].*")
+            || !password.matches(".*[^A-Za-z0-9].*")) {
             showFieldError(
                 binding.tilNewPassword,
                 binding.cardSectionCredentials,
-                "Mật khẩu khởi tạo phải có ít nhất 6 ký tự"
+                "Mật khẩu cần 8–20 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt"
             );
             return;
         }
@@ -181,11 +186,11 @@ public class OfficerCreateAccountFragment extends Fragment {
             );
             return;
         }
-        if (phone.length() < 9 || phone.length() > 20) {
+        if (!phone.matches("^0[0-9]{9}$")) {
             showFieldError(
                 binding.tilNewPhone,
                 binding.cardSectionKyc,
-                "Số điện thoại phải từ 9 đến 20 ký tự"
+                "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng 0"
             );
             return;
         }
@@ -262,17 +267,17 @@ public class OfficerCreateAccountFragment extends Fragment {
                             Toast.LENGTH_LONG
                         ).show();
                     } else {
-                        String msg =
-                            response.code() == 409
-                                ? "Tên đăng nhập đã tồn tại trong hệ thống (409)"
-                                : "Tạo tài khoản thất bại (" + response.code() + ")";
+                        String msg = vn.edu.tdtu.phlbanking.ui.common.ApiErrors.message(
+                            response,
+                            "Tạo tài khoản thất bại"
+                        );
                         binding.tvCreateError.setText(msg);
                         binding.tvCreateError.setVisibility(View.VISIBLE);
                         MotionHelper.shakeError(binding.tvCreateError);
                         Toast.makeText(
-                            requireContext(),
-                            "Tạo tài khoản thất bại (" + response.code() + ")",
-                            Toast.LENGTH_SHORT
+                            requireContext().getApplicationContext(),
+                            msg,
+                            Toast.LENGTH_LONG
                         ).show();
                     }
                 }

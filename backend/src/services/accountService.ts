@@ -68,13 +68,21 @@ export async function getMortgageSchedules(customerId: number) {
   return results;
 }
 
-export async function getAccountHistory(customerId: number, accountId?: number) {
+export async function getAccountHistory(
+  customerId: number,
+  accountId?: number,
+  options: { limit?: number; offset?: number } = {},
+) {
+  const limit = Math.min(Math.max(options.limit ?? 20, 1), 100);
+  const offset = Math.max(options.offset ?? 0, 0);
+
   const params: unknown[] = [customerId];
   let accountFilter = '';
   if (accountId) {
     accountFilter = 'AND ba.id = ?';
     params.push(accountId);
   }
+  params.push(limit, offset);
 
   const [rows] = await pool.query<RowDataPacket[]>(
     `SELECT bf.id AS fluctuationId, bf.changeAmount, bf.balanceBefore, bf.balanceAfter,
@@ -88,9 +96,14 @@ export async function getAccountHistory(customerId: number, accountId?: number) 
      JOIN Transaction t ON t.id = bf.transactionId
      WHERE ba.customerId = ? ${accountFilter}
      ORDER BY bf.timestamp DESC, bf.id DESC
-     LIMIT 100`,
+     LIMIT ? OFFSET ?`,
     params,
   );
 
-  return rows;
+  return {
+    data: rows,
+    limit,
+    offset,
+    hasMore: rows.length === limit,
+  };
 }

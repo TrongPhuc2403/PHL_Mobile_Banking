@@ -23,7 +23,10 @@ Chỉ đăng ký lần đầu cho tài khoản của bạn. Không thể tự th
             android:layout_marginTop="@dimen/space_sm" android:text="Xác nhận mật khẩu và gửi OTP" />
         <TextView android:id="@+id/tvEnrollmentOtpNote" style="@style/TextAppearance.PHL.BodySecondary"
             android:layout_width="match_parent" android:layout_height="wrap_content" android:visibility="gone"
-            android:layout_marginTop="@dimen/space_sm" android:accessibilityLiveRegion="polite" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_m2_success_banner"
+            android:padding="@dimen/space_sm"
+            android:accessibilityLiveRegion="polite" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEnrollmentOtp" style="@style/Widget.PHL.TextInputLayout"
             android:layout_width="match_parent" android:layout_height="wrap_content" android:visibility="gone"

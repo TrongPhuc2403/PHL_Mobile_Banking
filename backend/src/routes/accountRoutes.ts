@@ -45,8 +45,14 @@ router.get('/mortgages', async (req, res, next) => {
 router.get('/history', async (req, res, next) => {
   try {
     const accountId = req.query.accountId ? Number(req.query.accountId) : undefined;
-    const data = await accountService.getAccountHistory(req.user!.profileId, accountId);
-    res.json({ success: true, data });
+    const rawLimit = req.query.limit !== undefined ? Number(req.query.limit) : undefined;
+    const rawOffset = req.query.offset !== undefined ? Number(req.query.offset) : undefined;
+    const result = await accountService.getAccountHistory(req.user!.profileId, accountId, {
+      limit: rawLimit !== undefined && Number.isFinite(rawLimit) ? Math.trunc(rawLimit) : undefined,
+      offset:
+        rawOffset !== undefined && Number.isFinite(rawOffset) ? Math.trunc(rawOffset) : undefined,
+    });
+    res.json({ success: true, ...result });
   } catch (err) {
     next(err);
   }

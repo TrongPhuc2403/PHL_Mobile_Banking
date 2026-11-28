@@ -119,6 +119,9 @@ public class TransferActivity extends AppCompatActivity {
         if ("DEPOSIT".equalsIgnoreCase(initialMode)) {
             binding.chipDeposit.setChecked(true);
             applyMode("DEPOSIT", false);
+        } else if ("WITHDRAW".equalsIgnoreCase(initialMode)) {
+            binding.chipWithdraw.setChecked(true);
+            applyMode("WITHDRAW", false);
         } else if ("GATEWAY".equalsIgnoreCase(initialMode)) {
             binding.chipGateway.setChecked(true);
             applyMode("GATEWAY", false);
@@ -548,16 +551,24 @@ public class TransferActivity extends AppCompatActivity {
                     ) {
                         otpRequested = true;
                         sheetBinding.btnExecuteTransaction.setEnabled(true);
-                        Object preview = response.body().data.get("devOtpPreview");
-                        sheetBinding.tvSecurityProgress.setText(
-                            preview == null
-                                ? "OTP đã gửi. Nhập đủ 6 số để tiếp tục."
-                                : "MÔI TRƯỜNG DEV · OTP: " +
-                                      preview +
-                                      " · Hiệu lực " +
-                                      response.body().data.get("expiresInSeconds") +
-                                      " giây. Hãy nhập mã bên dưới."
-                        );
+                        Map<String, Object> data = response.body().data;
+                        Object preview = otpPreview(data);
+                        Object expires = data.get("expiresInSeconds");
+                        String serverMessage = response.body().message;
+                        String banner;
+                        if (preview != null) {
+                            banner = "MÔI TRƯỜNG DEV · OTP: " + preview +
+                                (expires == null ? "" : " · Hiệu lực " + expires + " giây") +
+                                ". Hãy nhập mã bên dưới.";
+                        } else {
+                            banner = serverMessage == null || serverMessage.trim().isEmpty()
+                                ? "OTP đã được gửi. Nhập đủ 6 số để tiếp tục."
+                                : serverMessage.trim();
+                        }
+                        sheetBinding.tvOtpBanner.setText(banner);
+                        sheetBinding.tvOtpBanner.setVisibility(View.VISIBLE);
+                        sheetBinding.tvSecurityProgress.setText("OTP đã được yêu cầu. Nhập mã để tiếp tục.");
+                        Toast.makeText(getApplicationContext(), banner, Toast.LENGTH_LONG).show();
                     } else sheetBinding.tvSecurityProgress.setText(
                         ApiErrors.message(response, "Không gửi được OTP.")
                     );
@@ -578,6 +589,14 @@ public class TransferActivity extends AppCompatActivity {
                 }
             }
         );
+    }
+
+    private Object otpPreview(Map<String, Object> data) {
+        for (String key : new String[] { "debugOtp", "otpCode", "otp", "devOtpPreview" }) {
+            Object value = data.get(key);
+            if (value != null && !String.valueOf(value).trim().isEmpty()) return value;
+        }
+        return null;
     }
 
     private void executeTransaction(

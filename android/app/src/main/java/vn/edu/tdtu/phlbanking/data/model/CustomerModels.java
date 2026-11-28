@@ -1,5 +1,6 @@
 package vn.edu.tdtu.phlbanking.data.model;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CustomerModels {
@@ -20,6 +21,16 @@ public class CustomerModels {
         public Long loanAmount;
         public Long remainingPrincipal;
         public Double loanInterestRate;
+        public String repaymentCycle;
+        public String collateralInfo;
+    }
+
+    // Pagination metadata is at the same level as success and data in /accounts/history.
+    public static class HistoryPage extends ApiResponse<List<HistoryItem>> {
+
+        public int limit;
+        public int offset;
+        public boolean hasMore;
     }
 
     public static class HistoryItem {
@@ -43,11 +54,13 @@ public class CustomerModels {
     public static class MortgageLoanItem {
 
         public long id;
+        public long bankAccountId;
         public String accountNumber;
         public long loanAmount;
         public long remainingPrincipal;
         public double interestRate;
         public int termMonths;
+        public String repaymentCycle;
         public String collateralInfo;
         public List<RepaymentItem> schedules;
     }
@@ -84,28 +97,41 @@ public class CustomerModels {
 
     public static class BranchItem {
 
-        public long id;
-        public String branchName;
-        public String address;
-        public double latitude;
-        public double longitude;
-        public String phone;
-        public int distanceMeters;
-        public int estimatedWalkMinutes;
+        @SerializedName("id") public long id;
+        @SerializedName("branchName") public String branchName;
+        @SerializedName("address") public String address;
+        // Missing coordinates must not be treated as a real point at (0, 0).
+        @SerializedName("latitude") public double latitude = Double.NaN;
+        @SerializedName("longitude") public double longitude = Double.NaN;
+        @SerializedName("phone") public String phone;
+        @SerializedName("distanceMeters") public int distanceMeters = -1;
+        @SerializedName("estimatedWalkMinutes") public int estimatedWalkMinutes = -1;
+        @SerializedName("googleMapsUrl") public String googleMapsUrl;
     }
 
     public static class BranchesResponse {
 
-        public List<BranchItem> branches;
-        public BranchItem nearest;
-        public WalkingRoute walkingRoute;
+        @SerializedName("branches") public List<BranchItem> branches;
+        @SerializedName("nearest") public BranchItem nearest;
+        @SerializedName("walkingRoute") public WalkingRoute walkingRoute;
     }
 
     public static class WalkingRoute {
 
-        public String mode;
-        public int distanceMeters;
-        public int estimatedMinutes;
+        @SerializedName("mode") public String mode;
+        @SerializedName("algorithm") public String algorithm;
+        @SerializedName("note") public String note;
+        @SerializedName("distanceMeters") public int distanceMeters;
+        @SerializedName("estimatedMinutes") public int estimatedMinutes;
+        @SerializedName("waypoints") public List<Waypoint> waypoints;
+        @SerializedName("googleMapsUrl") public String googleMapsUrl;
+    }
+
+    public static class Waypoint {
+
+        @SerializedName("lat") public double lat = Double.NaN;
+        @SerializedName("lng") public double lng = Double.NaN;
+        @SerializedName("label") public String label;
     }
 
     public static class AiChatResponse {
@@ -119,6 +145,7 @@ public class CustomerModels {
 
         public String label;
         public String route;
+        public String actionToken;
     }
 
     public static class NotificationsResponse {

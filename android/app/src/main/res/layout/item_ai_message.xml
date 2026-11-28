@@ -34,5 +34,14 @@
             android:fontFeatureSettings="tnum"
             android:maxWidth="280dp"
             android:text="--" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMessageAction"
+            style="@style/Widget.PHL.Button.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:maxWidth="280dp"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

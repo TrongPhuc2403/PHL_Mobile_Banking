@@ -217,6 +217,13 @@ export async function depositOrWithdraw(params: {
       if (!acc || acc.status !== 'ACTIVE') {
         throw new AppError(404, 'ACCOUNT_NOT_FOUND', 'Tài khoản không hợp lệ hoặc đang bị khóa');
       }
+      if (acc.accountType !== 'CHECKING') {
+        throw new AppError(
+          400,
+          'INVALID_ACCOUNT_TYPE',
+          'Chỉ tài khoản thanh toán (Checking) mới được phép nạp/rút tiền trực tiếp',
+        );
+      }
       if (params.mode === 'WITHDRAW' && acc.availableBalance < params.amount) {
         throw new AppError(400, 'INSUFFICIENT_BALANCE', 'Số dư khả dụng không đủ');
       }

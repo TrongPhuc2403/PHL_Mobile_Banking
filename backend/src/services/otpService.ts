@@ -39,12 +39,19 @@ export async function issueOtp(
     [userId, transactionId, otpHash, otpType, env.security.otpExpiresMinutes],
   );
 
+  const expiresInSeconds = env.security.otpExpiresMinutes * 60;
+  const isSandbox = env.nodeEnv !== 'production';
+  if (isSandbox) {
+    console.info(`[SANDBOX OTP] userId=${userId} otpType=${otpType} code=${code}`);
+  }
+
   return {
     otpId: result.insertId,
     otpType,
-    expiresInSeconds: env.security.otpExpiresMinutes * 60,
-    // Trả về mã giả lập ở môi trường development để kiểm thử
-    devOtpPreview: env.nodeEnv === 'development' ? code : undefined,
+    expiresInSeconds,
+    // Expose test OTP only outside production. Keep legacy preview for older clients.
+    debugOtp: isSandbox ? code : undefined,
+    devOtpPreview: isSandbox ? code : undefined,
   };
 }
 

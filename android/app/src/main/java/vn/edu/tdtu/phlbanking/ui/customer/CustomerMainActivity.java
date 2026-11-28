@@ -11,6 +11,7 @@ import vn.edu.tdtu.phlbanking.ui.common.MotionHelper;
 public class CustomerMainActivity extends AppCompatActivity {
 
     private ActivityCustomerMainBinding binding;
+    private Fragment requestedTabFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +26,11 @@ public class CustomerMainActivity extends AppCompatActivity {
                 MotionHelper.animateTabSelection(binding.customerBottomNav);
                 return true;
             } else if (id == R.id.tab_cust_accounts) {
-                swapFragment(new CustomerAccountsFragment());
+                swapFragment(requestedTabFragment != null ? requestedTabFragment : new CustomerAccountsFragment());
                 MotionHelper.animateTabSelection(binding.customerBottomNav);
                 return true;
             } else if (id == R.id.tab_cust_utilities) {
-                swapFragment(new CustomerUtilitiesFragment());
+                swapFragment(requestedTabFragment != null ? requestedTabFragment : new CustomerUtilitiesFragment());
                 MotionHelper.animateTabSelection(binding.customerBottomNav);
                 return true;
             } else if (id == R.id.tab_cust_explore) {
@@ -54,6 +55,28 @@ public class CustomerMainActivity extends AppCompatActivity {
 
     public void selectTab(int tabId) {
         binding.customerBottomNav.setSelectedItemId(tabId);
+    }
+
+    public void openAccounts(CustomerAccountsFragment.Section section) {
+        selectTab(R.id.tab_cust_accounts, CustomerAccountsFragment.newInstance(section));
+    }
+
+    public void openUtilities(CustomerUtilitiesFragment.Mode mode) {
+        selectTab(R.id.tab_cust_utilities, CustomerUtilitiesFragment.newInstance(mode));
+    }
+
+    private void selectTab(int tabId, Fragment fragment) {
+        if (binding.customerBottomNav.getSelectedItemId() == tabId) {
+            swapFragment(fragment);
+            return;
+        }
+        // Let the normal selection listener perform the transaction and update the selected tab.
+        requestedTabFragment = fragment;
+        try {
+            selectTab(tabId);
+        } finally {
+            requestedTabFragment = null;
+        }
     }
 
     private void swapFragment(Fragment fragment) {

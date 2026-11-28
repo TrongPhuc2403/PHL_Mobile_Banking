@@ -717,14 +717,25 @@ public final class Tier2BoundaryTests {
             return "Verified distinct User vs AI chat bubbles";
         }));
 
-        out.add(execute("T2-F10-04", 2, f, "AI typing indicator cleaned in onResponse & onFailure + isAdded", "R2-R3, F10", () -> {
+        out.add(execute("T2-F10-04", 2, f, "AI typing indicator and single-request lifecycle", "R2-R3, F10", () -> {
             String src = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerExploreFragment.java"));
-            assertTrue(src.contains("isAdded()"), "Missing isAdded() guard");
-            String askAi = SourceInspector.extractMethodBody(src, "\\bvoid\\s+(?:sendAiQuestion|sendAiMessage)\\s*\\([^)]*\\)");
-            assertFalse(askAi.isEmpty(), "sendAiQuestion/sendAiMessage method not found");
-            assertTrue(askAi.contains("typing") || askAi.contains("Typing"),
-                    "sendAiQuestion/sendAiMessage missing AI typing indicator lifecycle");
-            return "Verified AI typing indicator & isAdded";
+            String askAi = SourceInspector.extractMethodBody(src, "\\bvoid\\s+sendAiQuestion\\s*\\([^)]*\\)");
+            assertTrue(askAi.contains("aiCall != null") && askAi.contains("showTypingIndicator()"),
+                    "Sending must show the indicator and reject overlapping requests");
+            assertTrue(askAi.split("finishAiRequest\\(call\\)", -1).length == 3,
+                    "Both Retrofit callbacks must finish the active request");
+            String finish = SourceInspector.extractMethodBody(src, "\\bboolean\\s+finishAiRequest\\s*\\([^)]*\\)");
+            assertTrue(finish.contains("call != aiCall") && finish.contains("hideTypingIndicator()")
+                            && finish.contains("setAiSending(false)"),
+                    "Completion must ignore stale calls and restore the chat controls");
+            String destroy = SourceInspector.extractMethodBody(src, "\\bvoid\\s+onDestroyView\\s*\\([^)]*\\)");
+            assertTrue(destroy.contains("aiCall = null") && destroy.contains("call.cancel()")
+                            && destroy.contains("hideTypingIndicator()"),
+                    "Destroying the view must cancel the active chat request and typing animation");
+            XmlInspector.LayoutInfo explore = ctx.xml().parseLayout("fragment_customer_explore.xml");
+            assertTrue(explore.allElements.stream().anyMatch(e -> "Đang trả lời...".equals(XmlInspector.getAttr(e, "text"))),
+                    "Missing updated typing text");
+            return "Verified typing copy and active-request cleanup";
         }));
 
         out.add(execute("T2-F10-05", 2, f, "nearestBranch null guard, checkedIds guard & non-blocking", "R2-R3, F10", () -> {

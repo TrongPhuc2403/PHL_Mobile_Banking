@@ -120,24 +120,59 @@ public final class Tier3CrossFeatureTests {
             return "Verified 7 utilities -> tile -> shared sheet -> OTP -> receipt";
         }));
 
-        out.add(execute("T3_08", 3, f, "Explore AI Deep-Links (phl://) x CustomerMainActivity x Transfer", "R3, F6, F10, F12", () -> {
+        out.add(execute("T3_08", 3, f, "Explore AI action buttons x CustomerMainActivity x Transfer", "R3, F6, F10, F12", () -> {
             String ex = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerExploreFragment.java"));
-            assertTrue(ex.contains("phl://transfer") && ex.contains("TransferActivity.class"), "Missing phl://transfer");
-            assertTrue(ex.contains("phl://map") && ex.contains("chipMapBranch.setChecked(true)"), "Missing phl://map");
-            assertTrue(ex.contains("phl://savings") && ex.contains("phl://mortgage") && ex.contains("tab_cust_accounts"),
-                    "Missing phl://savings|mortgage -> accounts tab");
-            assertTrue(ex.contains("phl://utilities") && ex.contains("tab_cust_utilities"),
-                    "Missing phl://utilities -> utilities tab");
-            return "Verified all 5 phl:// deep-links";
+            String main = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerMainActivity.java"));
+            XmlInspector.LayoutInfo message = ctx.xml().parseLayout("item_ai_message.xml");
+            XmlInspector.LayoutInfo explore = ctx.xml().parseLayout("fragment_customer_explore.xml");
+            assertTrue("MaterialButton".equals(message.tagOf("btnMessageAction"))
+                            && "gone".equals(XmlInspector.getAttr(message.element("btnMessageAction"), "visibility"))
+                            && !explore.hasId("btnAiSuggestedAction"),
+                    "The action button must be hidden by default and belong to the message, not the chat panel");
+            assertTrue(ex.contains("resolveAiAction(suggestion.actionToken)")
+                            && ex.contains("btnMessageAction.setText(suggestion.label)")
+                            && !ex.contains("lastSuggestedRoute"),
+                    "Bubble actions must use their own label and allowlisted token");
+            String actions = SourceInspector.extractMethodBody(ex, "\\bRunnable\\s+resolveAiAction\\s*\\([^)]*\\)");
+            for (String token : List.of("TRANSFER", "PAY_BILL", "TOPUP", "HISTORY", "SAVINGS", "MORTGAGE", "MAP", "PROFILE")) {
+                assertTrue(actions.contains("case \"[ACTION_" + token + "]\""), "Missing action token: " + token);
+            }
+            assertTrue(actions.contains("TransferActivity.class") && actions.contains("chipMapBranch.setChecked(true)")
+                            && actions.contains("selectTab(R.id.tab_cust_profile)"),
+                    "Missing transfer, map, or profile destination");
+            for (String section : List.of("HISTORY", "SAVINGS", "MORTGAGE")) {
+                assertTrue(actions.contains("openAccounts(CustomerAccountsFragment.Section." + section + ")"),
+                        "Missing Accounts section: " + section);
+            }
+            for (String mode : List.of("BILL_PAYMENT", "TOPUP")) {
+                assertTrue(actions.contains("openUtilities(CustomerUtilitiesFragment.Mode." + mode + ")"),
+                        "Missing Utilities mode: " + mode);
+            }
+            assertTrue(main.contains("selectTab(R.id.tab_cust_accounts,") && main.contains("selectTab(R.id.tab_cust_utilities,"),
+                    "Action destinations must select the corresponding bottom tab");
+            return "Verified all eight chatbot action tokens, message-local buttons, and navigation destinations";
         }));
 
-        out.add(execute("T3_09", 3, f, "Explore Map Branches x item_branch_card x Walking Intent", "R1, R3, F10", () -> {
+        out.add(execute("T3_09", 3, f, "Explore Branch Lookup x item_branch_card x HTTPS Walking Directions", "R1, R3, F10", () -> {
             String ex = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerExploreFragment.java"));
             assertTrue(ctx.xml().parseLayout("item_branch_card.xml").exists, "Missing item_branch_card.xml");
-            assertTrue(ex.contains("getBranches(10.7315, 106.6980)")
-                    && ex.contains("Intent.ACTION_VIEW") && ex.contains("google.navigation:q="),
-                    "Missing getBranches or google.navigation walking intent");
-            return "Verified Map branches -> item_branch_card -> walking intent";
+            assertTrue(ex.contains("ItemBranchCardBinding.inflate("), "Explore does not inflate the branch card");
+            assertTrue(ex.contains("loadBranches(location.getLatitude(), location.getLongitude())")
+                    && ex.contains("loadBranches(null, null)") && ex.contains(".getBranches(lat, lng)"),
+                    "Branch lookup must forward device coordinates or omit them for the fallback");
+            assertTrue(ex.contains("mapsDestination(branch.googleMapsUrl)")
+                    && ex.contains("mapsDestination(route.googleMapsUrl)")
+                    && ex.contains("\"https\".equalsIgnoreCase(parsed.getScheme())")
+                    && ex.contains("\"www.google.com\".equalsIgnoreCase(authority)"),
+                    "Directions must validate backend googleMapsUrl links before using their destination");
+            assertTrue(ex.contains("Uri webUrl = directionsUrl(")
+                    && ex.contains(".scheme(\"https\").authority(\"www.google.com\")")
+                    && ex.contains(".path(\"/maps/dir/\")")
+                    && ex.contains(".appendQueryParameter(\"travelmode\", \"walking\")")
+                    && ex.contains("new Intent(Intent.ACTION_VIEW, webUrl)")
+                    && ex.contains("startActivity(webIntent)"),
+                    "Explore must open HTTPS Google Maps walking directions with ACTION_VIEW");
+            return "Verified branch lookup, branch card inflation, and HTTPS walking directions";
         }));
 
         out.add(execute("T3_10", 3, f, "Shared ChangePasswordDialogHelper across Customer & Officer", "R1, R3, F4, F11, F18", () -> {

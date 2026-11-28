@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -125,13 +126,14 @@ public final class EkycEnrollmentDialog {
                                 : 120;
                         resendAt = now + 30_000;
                         expiresAt = now + seconds * 1000L;
-                        Object preview = data.get("devOtpPreview");
+                        Object preview = otpPreview(data);
                         otpNote =
                             preview == null
                                 ? "Nhập OTP đăng ký được gửi tới bạn."
                                 : "CHẾ ĐỘ DEV · OTP đăng ký: " +
                                   preview +
                                   ". Hãy nhập tay, chưa có SMS thật.";
+                        Toast.makeText(context.getApplicationContext(), otpNote, Toast.LENGTH_LONG).show();
                         binding.tilEnrollmentOtp.setVisibility(View.VISIBLE);
                         binding.tvEnrollmentOtpNote.setVisibility(View.VISIBLE);
                         setBusy(false);
@@ -181,6 +183,14 @@ public final class EkycEnrollmentDialog {
                 }
             }
         );
+    }
+
+    private Object otpPreview(Map<String, Object> data) {
+        for (String key : new String[] { "debugOtp", "otpCode", "otp", "devOtpPreview" }) {
+            Object value = data.get(key);
+            if (value != null && !String.valueOf(value).trim().isEmpty()) return value;
+        }
+        return null;
     }
 
     private void confirmOtp() {

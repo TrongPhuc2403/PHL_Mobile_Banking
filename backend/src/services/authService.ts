@@ -5,6 +5,8 @@ import { pool } from '../config/db';
 import { env } from '../config/env';
 import { AuthTokenPayload, UserRole } from '../types/auth';
 import { AppError } from '../utils/errors';
+import { isUserTokenRevoked, revokeAllTokens } from '../middleware/authMiddleware';
+import { issueOtp, verifyOtp } from './otpService';
 
 interface UserRow extends RowDataPacket {
   id: number;
@@ -110,7 +112,12 @@ export async function login(username: string, password: string) {
 
 export async function refreshSession(refreshToken: string) {
   try {
-    const decoded = jwt.verify(refreshToken, env.jwt.refreshSecret) as AuthTokenPayload;
+    const decoded = jwt.verify(refreshToken, env.jwt.refreshSecret) as AuthTokenPayload & {
+      iat?: number;
+    };
+    if (isUserTokenRevoked(decoded.userId, decoded.iat)) {
+      throw new AppError(401, 'TOKEN_REVOKED', 'Phiên đăng nhập đã kết thúc');
+    }
     const payload: AuthTokenPayload = {
       userId: decoded.userId,
       username: decoded.username,
@@ -118,12 +125,22 @@ export async function refreshSession(refreshToken: string) {
       profileId: decoded.profileId,
     };
     return signTokens(payload);
-  } catch {
+  } catch (err) {
+    if (err instanceof AppError) {
+      throw err;
+    }
     throw new AppError(401, 'INVALID_REFRESH_TOKEN', 'Refresh token không hợp lệ hoặc đã hết hạn');
   }
 }
 
-export async function changePassword(userId: number, currentPassword: string, newPassword: string) {
+export async function changePassword(
+  userId: number,
+  currentPassword: string,
+  newPassword: string,
+  otpCode: string,
+) {
+  await verifyOtp(userId, otpCode, 'CHANGE_PASSWORD');
+
   const [users] = await pool.query<UserRow[]>('SELECT * FROM UserAccount WHERE id = ? LIMIT 1', [
     userId,
   ]);
@@ -139,6 +156,14 @@ export async function changePassword(userId: number, currentPassword: string, ne
 
   const nextHash = await bcrypt.hash(newPassword, 10);
   await pool.query('UPDATE UserAccount SET passwordHash = ? WHERE id = ?', [nextHash, userId]);
+
+  await pool.query(
+    `INSERT INTO AuditLog (actorId, actorRole, action, entityName, entityId, oldValue, newValue, timestamp)
+     VALUES (?, ?, 'CHANGE_PASSWORD', 'UserAccount', ?, NULL, '{"changed":true}', NOW())`,
+    [userId, user.role, userId],
+  );
+
+  revokeAllTokens(userId);
 }
 
 export async function resetPasswordWithOtp(username: string, newPassword: string) {
@@ -156,6 +181,42 @@ export async function resetPasswordWithOtp(username: string, newPassword: string
     'UPDATE UserAccount SET passwordHash = ?, failedAttempts = 0, lockedUntil = NULL WHERE id = ?',
     [nextHash, user.id],
   );
+
+  await pool.query(
+    `INSERT INTO AuditLog (actorId, actorRole, action, entityName, entityId, oldValue, newValue, timestamp)
+     VALUES (?, 'CUSTOMER', 'RESET_PASSWORD_VIA_OTP', 'UserAccount', ?, NULL, '{"resetMethod":"OTP+CCCD"}', NOW())`,
+    [user.id, user.id],
+  );
+}
+
+export async function issueOtpByUsernameAndIdCard(
+  username: string,
+  idCardNumber: string,
+  otpType: string,
+) {
+  const [rows] = await pool.query<UserRow[]>(
+    `SELECT u.id, u.username, u.passwordHash, u.role, u.status, u.failedAttempts, u.lockedUntil
+     FROM UserAccount u
+     INNER JOIN CustomerProfile cp ON cp.userId = u.id
+     WHERE u.username = ? AND cp.idCardNumber = ?
+     LIMIT 1`,
+    [username.trim(), idCardNumber.trim()],
+  );
+
+  const user = rows[0];
+  if (!user) {
+    throw new AppError(404, 'USER_NOT_FOUND', 'Thông tin xác minh không khớp');
+  }
+
+  const otpData = await issueOtp(user.id, otpType);
+
+  await pool.query(
+    `INSERT INTO AuditLog (actorId, actorRole, action, entityName, entityId, oldValue, newValue, timestamp)
+     VALUES (?, ?, 'FORGOT_PASSWORD_OTP_REQUEST', 'UserAccount', ?, NULL, ?, NOW())`,
+    [user.id, user.role, user.id, JSON.stringify({ otpType, otpId: otpData.otpId })],
+  );
+
+  return otpData;
 }
 
 export async function getProfileByUserId(userId: number, role: UserRole): Promise<ProfileRow> {
@@ -207,7 +268,21 @@ export async function updateCustomerContact(
     throw new AppError(400, 'NO_CHANGES', 'Không có thông tin nào cần cập nhật');
   }
 
+  const oldProfile = await getProfileByUserId(userId, 'CUSTOMER');
+  const oldContact = {
+    phone: oldProfile.phone,
+    email: oldProfile.email,
+    address: oldProfile.address ?? null,
+  };
+
   values.push(userId);
   await pool.query(`UPDATE CustomerProfile SET ${fields.join(', ')} WHERE userId = ?`, values);
+
+  await pool.query(
+    `INSERT INTO AuditLog (actorId, actorRole, action, entityName, entityId, oldValue, newValue, timestamp)
+     VALUES (?, 'CUSTOMER', 'UPDATE_CONTACT_INFO', 'CustomerProfile', ?, ?, ?, NOW())`,
+    [userId, oldProfile.id, JSON.stringify(oldContact), JSON.stringify(updates)],
+  );
+
   return getProfileByUserId(userId, 'CUSTOMER');
 }

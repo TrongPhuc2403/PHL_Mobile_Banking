@@ -99,7 +99,7 @@
                     style="@style/TextAppearance.PHL.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hạn mức vay" />
+                    android:text="Số tiền vay ban đầu" />
 
                 <TextView
                     android:id="@+id/tvMortgageLoanAmount"
@@ -140,6 +140,21 @@
             android:layout_height="@dimen/hairline_height"
             android:layout_marginTop="@dimen/space_md"
             android:background="@color/phl_divider" />
+
+        <TextView
+            android:id="@+id/tvMortgageCycle"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_md" />
+
+        <TextView
+            android:id="@+id/tvMortgageNextPayment"
+            style="@style/TextAppearance.PHL.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/btnToggleSchedule"

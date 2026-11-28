@@ -93,7 +93,11 @@ router.post('/otp/request', requireAuth, async (req, res, next) => {
       purpose = transactionOtpType(hash);
     }
     const data = await otpService.issueOtp(req.user!.userId, purpose);
-    res.json({ success: true, data });
+    res.json({
+      success: true,
+      message: 'Đã tạo mã OTP 6 số. Vui lòng nhập mã để xác thực.',
+      data,
+    });
   } catch (err) {
     next(err);
   }

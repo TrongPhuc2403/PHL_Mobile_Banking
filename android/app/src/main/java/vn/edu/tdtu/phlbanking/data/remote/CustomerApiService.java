@@ -27,6 +27,13 @@ public interface CustomerApiService {
     @GET("api/accounts/history")
     Call<ApiResponse<List<CustomerModels.HistoryItem>>> getHistory();
 
+    @GET("api/accounts/history")
+    Call<CustomerModels.HistoryPage> getHistory(
+        @Query("accountId") Long accountId,
+        @Query("limit") int limit,
+        @Query("offset") int offset
+    );
+
     @POST("api/security/otp/request")
     Call<ApiResponse<Map<String, Object>>> requestOtp(@Body Map<String, Object> body);
 
@@ -84,6 +91,7 @@ public interface CustomerApiService {
     @GET("api/hub/notifications")
     Call<ApiResponse<CustomerModels.NotificationsResponse>> getNotifications();
 
+    // Pass null for both coordinates to omit them and load the full branch list.
     @GET("api/hub/branches")
     Call<ApiResponse<CustomerModels.BranchesResponse>> getBranches(
         @Query("lat") Double lat,

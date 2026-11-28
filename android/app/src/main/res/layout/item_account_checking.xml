@@ -118,6 +118,46 @@
                     android:fontFeatureSettings="tnum"
                     android:text="0 VNĐ" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_sm"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCheckingTransfer"
+                        style="@style/Widget.PHL.Button.Text.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:paddingStart="@dimen/space_xxs"
+                        android:paddingEnd="@dimen/space_xxs"
+                        android:text="Chuyển tiền" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCheckingDeposit"
+                        style="@style/Widget.PHL.Button.Text.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:paddingStart="@dimen/space_xxs"
+                        android:paddingEnd="@dimen/space_xxs"
+                        android:text="Nạp tiền" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCheckingWithdraw"
+                        style="@style/Widget.PHL.Button.Text.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="48dp"
+                        android:paddingStart="@dimen/space_xxs"
+                        android:paddingEnd="@dimen/space_xxs"
+                        android:text="Rút tiền" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

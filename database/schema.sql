@@ -158,6 +158,16 @@ CREATE TABLE `AuditLog` (
   `timestamp` DATETIME NOT NULL
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS `PolicyNotification` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `customerId` BIGINT NOT NULL,
+  `category` VARCHAR(30) NOT NULL DEFAULT 'INTEREST_RATE',
+  `title` VARCHAR(200) NOT NULL,
+  `message` TEXT NOT NULL,
+  `isRead` BOOLEAN NOT NULL DEFAULT FALSE,
+  `publishedAt` DATETIME NOT NULL
+) ENGINE=InnoDB;
+
 ALTER TABLE `CustomerProfile` ADD CONSTRAINT `fk_CustomerProfile_userId` FOREIGN KEY (`userId`) REFERENCES `UserAccount` (`id`);
 ALTER TABLE `OfficerProfile` ADD CONSTRAINT `fk_OfficerProfile_userId` FOREIGN KEY (`userId`) REFERENCES `UserAccount` (`id`);
 ALTER TABLE `OTPVerification` ADD CONSTRAINT `fk_OTPVerification_userId` FOREIGN KEY (`userId`) REFERENCES `UserAccount` (`id`);
@@ -173,6 +183,9 @@ ALTER TABLE `UtilityOrder` ADD CONSTRAINT `fk_UtilityOrder_customerId` FOREIGN K
 ALTER TABLE `OfficerProfile` ADD CONSTRAINT `fk_OfficerProfile_branchId` FOREIGN KEY (`branchId`) REFERENCES `BranchLocation` (`id`);
 ALTER TABLE `AuditLog` ADD CONSTRAINT `fk_AuditLog_actorId` FOREIGN KEY (`actorId`) REFERENCES `UserAccount` (`id`);
 ALTER TABLE `OTPVerification` ADD CONSTRAINT `fk_OTPVerification_transactionId` FOREIGN KEY (`transactionId`) REFERENCES `Transaction` (`id`);
+ALTER TABLE `PolicyNotification`
+ADD CONSTRAINT `fk_PolicyNotification_customerId`
+FOREIGN KEY (`customerId`) REFERENCES `CustomerProfile` (`id`);
 
 -- Important: model does not yet have a direct UtilityOrder -> Transaction FK.
 -- Business rules (account type, three initial accounts, transaction invariants) need application logic or further constraints.

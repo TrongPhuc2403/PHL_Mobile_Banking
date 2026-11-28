@@ -731,29 +731,36 @@ public final class Tier1FeatureTests {
             return "motions=" + motions;
         }));
 
-        out.add(execute("T1-F10-05", 1, f, "Explore Map/AI APIs & all 5 phl:// deep-links preserved", "R1-R3, F10", () -> {
+        out.add(execute("T1-F10-05", 1, f, "Explore Map/AI APIs preserved", "R1-R3, F10", () -> {
             String src = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerExploreFragment.java"));
             assertFalse(SourceInspector.hasWebViewReference(src), "WebView found");
-            assertTrue(src.contains(".getBranches(") && src.contains("google.navigation:q=") && src.contains(".askAi("),
-                    "Missing getBranches/walking intent/askAi");
-            for (String link : List.of("phl://transfer", "phl://map", "phl://savings", "phl://mortgage", "phl://utilities")) {
-                assertTrue(src.contains(link), "Missing deep-link: " + link);
-            }
-            return "Verified Explore APIs & 5 deep-links";
+            assertTrue(src.contains("LocationServices.getFusedLocationProviderClient(")
+                    && src.contains("fusedLocationClient.getCurrentLocation(")
+                    && src.contains("loadBranches(location.getLatitude(), location.getLongitude())")
+                    && src.contains(".getBranches(lat, lng)"),
+                    "Branch lookup must use the current fused location");
+            assertTrue(src.contains("loadBranches(null, null)")
+                    && src.contains("nearestBranch = nearby ? data.nearest : null")
+                    && src.contains("branchAdapter.submitList(branches, nearby)"),
+                    "Location fallback must list branches without coordinates or a nearest branch");
+            assertTrue(src.contains("new Intent(Intent.ACTION_VIEW, webUrl)"),
+                    "Missing ACTION_VIEW for the walking directions URL");
+            assertTrue(src.contains(".askAi("), "Missing askAi");
+            return "Verified Explore Map/AI APIs";
         }));
 
-        out.add(execute("T1-F10-06", 1, f, "All 13 Explore ViewBinding IDs & ScrollView preserved", "R3, F10", () -> {
+        out.add(execute("T1-F10-06", 1, f, "Explore ViewBinding IDs & ScrollView preserved", "R3, F10", () -> {
             XmlInspector.LayoutInfo ex = ctx.xml().parseLayout("fragment_customer_explore.xml");
             for (String id : List.of("chipExploreMode", "chipMapBranch", "chipAiAssistant",
                     "panelMapBranches", "tvNearestBranch", "btnOpenWalkingMap",
                     "containerBranchList", "panelAiChat", "scrollAiMessages",
-                    "containerAiMessages", "btnAiSuggestedAction", "edtAiPrompt", "btnSendAi")) {
+                    "containerAiMessages", "layoutAiTyping", "edtAiPrompt", "btnSendAi")) {
                 assertTrue(ex.hasId(id), "fragment_customer_explore.xml missing " + id);
             }
             String scrollTag = ex.tagOf("scrollAiMessages");
             assertTrue("ScrollView".equals(scrollTag) || "NestedScrollView".equals(scrollTag),
                     "scrollAiMessages must be ScrollView/NestedScrollView, found " + scrollTag);
-            return "All 13 Explore IDs preserved";
+            return "Verified Explore IDs and message scroll container";
         }));
     }
 

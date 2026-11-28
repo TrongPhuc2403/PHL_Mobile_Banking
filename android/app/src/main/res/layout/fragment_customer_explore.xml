@@ -88,10 +88,123 @@
             android:orientation="vertical"
             android:padding="@dimen/space_base">
 
+            <!-- Fallback notice when GPS/permission is unavailable -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLocationFallback"
+                style="@style/Widget.PHL.Card.Tile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_md"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/phl_warning_tint">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_base">
+
+                    <TextView
+                        android:id="@+id/tvLocationFallback"
+                        style="@style/TextAppearance.PHL.BodySecondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:accessibilityLiveRegion="polite"
+                        android:textColor="@color/phl_text_primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRequestLocation"
+                        style="@style/Widget.PHL.Button.Outlined"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_sm"
+                        android:text="Cấp quyền / Thử lại GPS" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvBranchStatus"
+                style="@style/TextAppearance.PHL.BodySecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_sm"
+                android:accessibilityLiveRegion="polite"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetryBranches"
+                style="@style/Widget.PHL.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_sm"
+                android:text="Tải lại chi nhánh"
+                android:visibility="gone" />
+
+            <!-- Interactive OSMDroid Map -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMapContainer"
                 style="@style/Widget.PHL.Card.Elevated"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_md"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <org.osmdroid.views.MapView
+                        android:id="@+id/mapBranches"
+                        android:layout_width="match_parent"
+                        android:layout_height="260dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/space_sm"
+                        android:paddingEnd="@dimen/space_base"
+                        android:paddingStart="@dimen/space_base"
+                        android:paddingTop="@dimen/space_sm">
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Vị trí của bạn"
+                            android:textColor="@color/phl_info" />
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Chi nhánh PHL Bank"
+                            android:textColor="@color/phl_danger" />
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● Chi nhánh gần nhất"
+                            android:textColor="@color/phl_emerald_dark" />
+
+                        <TextView
+                            style="@style/TextAppearance.PHL.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_xs"
+                            android:text="© OpenStreetMap contributors" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardNearestBranch"
+                style="@style/Widget.PHL.Card.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -185,8 +298,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_sm"
-                        android:fontFeatureSettings="tnum"
-                        android:text="Đang xác định vị trí GPS..." />
+                        android:fontFeatureSettings="tnum" />
+
+                    <TextView
+                        android:id="@+id/tvWalkingRouteNote"
+                        style="@style/TextAppearance.PHL.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_xs"
+                        android:textColor="@color/phl_text_muted"
+                        android:visibility="gone" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnOpenWalkingMap"
@@ -194,7 +315,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_md"
-                        android:text="Mở dẫn đường đi bộ"
+                        android:text="Chỉ đường"
                         app:icon="@drawable/ic_explore"
                         app:iconGravity="textStart"
                         app:iconPadding="@dimen/space_sm"
@@ -202,19 +323,26 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                style="@style/TextAppearance.PHL.SectionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_lg"
-                android:text="Danh sách chi nhánh PHL Bank" />
-
             <LinearLayout
                 android:id="@+id/containerBranchList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_sm"
-                android:orientation="vertical" />
+                android:layout_marginTop="@dimen/space_lg"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.PHL.SectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách chi nhánh PHL Bank" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBranchList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_sm"
+                    android:nestedScrollingEnabled="false" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -247,6 +375,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_xs"
+            android:accessibilityLiveRegion="polite"
             android:background="@drawable/bg_chat_ai"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -260,7 +389,7 @@
                 style="@style/TextAppearance.PHL.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trợ lý PHL đang trả lời"
+                android:text="Đang trả lời..."
                 android:textColor="@color/phl_navy" />
 
             <View
@@ -284,17 +413,6 @@
                 android:layout_marginStart="@dimen/space_xs"
                 android:background="@drawable/bg_m3_typing_dot" />
         </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAiSuggestedAction"
-            style="@style/Widget.PHL.Button.Gold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_sm"
-            android:visibility="gone"
-            app:icon="@drawable/ic_chevron_right"
-            app:iconGravity="end"
-            app:iconTint="@color/phl_white" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"

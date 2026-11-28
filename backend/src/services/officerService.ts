@@ -4,8 +4,14 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { pool, withTransaction } from '../config/db';
 import { AppError } from '../utils/errors';
 
-export async function searchCustomers(keyword?: string) {
+export async function searchCustomers(
+  keyword?: string,
+  options: { limit?: number; offset?: number } = {},
+) {
+  const limit = Math.min(Math.max(options.limit ?? 20, 1), 100);
+  const offset = Math.max(options.offset ?? 0, 0);
   const q = keyword ? `%${keyword.trim()}%` : '%';
+
   const [rows] = await pool.query<RowDataPacket[]>(
     `SELECT cp.id AS customerId, cp.userId, cp.cifNumber, cp.fullName, cp.idCardNumber,
             cp.dob, cp.phone, cp.email, cp.address,
@@ -17,10 +23,16 @@ export async function searchCustomers(keyword?: string) {
      JOIN UserAccount ua ON ua.id = cp.userId
      WHERE cp.fullName LIKE ? OR cp.cifNumber LIKE ? OR cp.phone LIKE ? OR cp.idCardNumber LIKE ?
      ORDER BY cp.id DESC
-     LIMIT 50`,
-    [q, q, q, q],
+     LIMIT ? OFFSET ?`,
+    [q, q, q, q, limit, offset],
   );
-  return rows;
+
+  return {
+    data: rows,
+    limit,
+    offset,
+    hasMore: rows.length === limit,
+  };
 }
 
 export async function createCustomerAccount(params: {
@@ -45,7 +57,25 @@ export async function createCustomerAccount(params: {
       [params.username.trim()],
     );
     if (dup[0]) {
-      throw new AppError(409, 'USERNAME_EXISTS', 'Tên đăng nhập đã tồn tại');
+      throw new AppError(409, 'USERNAME_EXISTS', 'Tên đăng nhập đã tồn tại trong hệ thống');
+    }
+
+    // Kiểm tra trùng CCCD
+    const [dupIdCard] = await conn.query<RowDataPacket[]>(
+      'SELECT id FROM CustomerProfile WHERE idCardNumber = ? LIMIT 1',
+      [params.idCardNumber.trim()],
+    );
+    if (dupIdCard[0]) {
+      throw new AppError(409, 'ID_CARD_EXISTS', 'Số CCCD đã được đăng ký trong hệ thống');
+    }
+
+    // Kiểm tra trùng SĐT
+    const [dupPhone] = await conn.query<RowDataPacket[]>(
+      'SELECT id FROM CustomerProfile WHERE phone = ? LIMIT 1',
+      [params.phone.trim()],
+    );
+    if (dupPhone[0]) {
+      throw new AppError(409, 'PHONE_EXISTS', 'Số điện thoại đã được đăng ký trong hệ thống');
     }
 
     const [userInsert] = await conn.query<ResultSetHeader>(
@@ -183,6 +213,24 @@ export async function adjustInterestRate(params: {
       params.newInterestRate,
       params.targetId,
     ]);
+
+    const [accRows] = await conn.query<RowDataPacket[]>(
+      `SELECT ba.customerId FROM ${tableName === 'SavingsAccount' ? 'SavingsAccount sa JOIN BankAccount ba ON ba.id = sa.bankAccountId' : 'MortgageLoan ml JOIN BankAccount ba ON ba.id = ml.bankAccountId'} WHERE ${tableName === 'SavingsAccount' ? 'sa' : 'ml'}.id = ? LIMIT 1`,
+      [params.targetId],
+    );
+    if (accRows[0]) {
+      const productLabel = params.targetType === 'SAVINGS' ? 'Tiết kiệm' : 'Vay thế chấp';
+      await conn.query(
+        `INSERT INTO PolicyNotification (customerId, category, title, message, isRead, publishedAt)
+         VALUES (?, 'INTEREST_RATE', ?, ?, FALSE, NOW())`,
+        [
+          accRows[0].customerId,
+          `Thay đổi lãi suất ${productLabel}`,
+          `Lãi suất tài khoản ${productLabel} của bạn đã được điều chỉnh từ ${current.interestRate}%/năm thành ${params.newInterestRate}%/năm. Hiệu lực từ hôm nay.`,
+        ],
+      );
+    }
+
 
     await conn.query(
       `INSERT INTO AuditLog (actorId, actorRole, action, entityName, entityId, oldValue, newValue, timestamp)

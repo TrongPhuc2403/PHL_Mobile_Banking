@@ -296,7 +296,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_md"
-                    android:hint="Mật khẩu khởi tạo (tối thiểu 6 ký tự)"
+                    android:hint="Mật khẩu khởi tạo (8–20 ký tự)"
                     app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -426,7 +426,7 @@
                         android:fontFeatureSettings="tnum"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
-                        android:maxLength="20"
+                        android:maxLength="10"
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

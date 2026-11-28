@@ -192,9 +192,10 @@ public final class Tier4ScenarioTests {
                     "Utilities XML tile / shared sheet / receipt broken");
             String ex = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerExploreFragment.java"));
             assertTrue(ctx.xml().parseLayout("item_branch_card.xml").exists
-                    && ctx.xml().parseLayout("item_ai_message.xml").exists
-                    && ex.contains("google.navigation:q=") && ex.contains("phl://transfer"),
-                    "Explore XML cards/bubbles/deep-links broken");
+                    && ctx.xml().parseLayout("item_ai_message.xml").hasId("btnMessageAction")
+                    && ex.contains("google.navigation:q=") && ex.contains("case \"[ACTION_TRANSFER]\"")
+                    && ex.contains("TransferActivity.class"),
+                    "Explore XML cards, chatbot actions, or navigation broken");
             String pr = SourceInspector.stripComments(ctx.readJava("ui/customer/CustomerProfileFragment.java"));
             assertTrue(ctx.xml().parseLayout("item_policy_alert.xml").exists
                     && pr.contains("ChangePasswordDialogHelper.show") && pr.contains(".logout()"),

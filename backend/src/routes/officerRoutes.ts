@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { requireAuth, requireRole } from '../middleware/authMiddleware';
 import * as officerService from '../services/officerService';
 import * as ekycService from '../services/ekycService';
+import { strongPasswordSchema } from './authRoutes';
 import { captureSchema } from './securityRoutes';
 
 const router = Router();
@@ -11,8 +12,14 @@ router.use(requireAuth, requireRole('OFFICER'));
 router.get('/customers', async (req, res, next) => {
   try {
     const q = req.query.q ? String(req.query.q) : undefined;
-    const data = await officerService.searchCustomers(q);
-    res.json({ success: true, data });
+    const rawLimit = req.query.limit !== undefined ? Number(req.query.limit) : undefined;
+    const rawOffset = req.query.offset !== undefined ? Number(req.query.offset) : undefined;
+    const result = await officerService.searchCustomers(q, {
+      limit: rawLimit !== undefined && Number.isFinite(rawLimit) ? Math.trunc(rawLimit) : undefined,
+      offset:
+        rawOffset !== undefined && Number.isFinite(rawOffset) ? Math.trunc(rawOffset) : undefined,
+    });
+    res.json({ success: true, ...result });
   } catch (err) {
     next(err);
   }
@@ -23,7 +30,7 @@ router.post('/customers', async (req, res, next) => {
     const body = z
       .object({
         username: z.string().min(4).max(50),
-        password: z.string().min(6),
+        password: strongPasswordSchema,
         fullName: z.string().min(2).max(150),
         idCardNumber: z.string().length(12),
         dob: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),

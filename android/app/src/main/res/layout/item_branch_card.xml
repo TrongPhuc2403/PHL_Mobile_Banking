@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:text="PHL Branch" />
 
             <TextView
@@ -80,7 +80,8 @@
                     android:paddingStart="@dimen/space_sm"
                     android:paddingTop="@dimen/space_xs"
                     android:text="0 m"
-                    android:textColor="@color/phl_navy" />
+                    android:textColor="@color/phl_navy"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvBranchWalkTime"
@@ -95,8 +96,21 @@
                     android:paddingStart="@dimen/space_sm"
                     android:paddingTop="@dimen/space_xs"
                     android:text="0 phút đi bộ"
-                    android:textColor="@color/phl_emerald_dark" />
+                    android:textColor="@color/phl_emerald_dark"
+                    android:visibility="gone" />
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBranchDirections"
+                style="@style/Widget.PHL.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:minHeight="48dp"
+                android:text="Chỉ đường"
+                app:icon="@drawable/ic_explore"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_xs" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

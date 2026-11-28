@@ -125,6 +125,18 @@
             android:text="1 · Kiểm tra giao dịch → 2 · OTP → 3 · Hoàn tất"
             android:accessibilityLiveRegion="polite" />
 
+        <TextView
+            android:id="@+id/tvOtpBanner"
+            style="@style/TextAppearance.PHL.BodySecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_m2_success_banner"
+            android:padding="@dimen/space_sm"
+            android:text="OTP sẽ hiển thị tại đây sau khi được gửi."
+            android:visibility="visible"
+            android:accessibilityLiveRegion="polite" />
+
         <LinearLayout
             android:id="@+id/layoutOtpRow"
             android:layout_width="match_parent"

@@ -6,6 +6,15 @@ import * as otpService from '../services/otpService';
 
 const router = Router();
 
+export const strongPasswordSchema = z
+  .string()
+  .min(8, 'Mật khẩu tối thiểu 8 ký tự')
+  .max(20, 'Mật khẩu tối đa 20 ký tự')
+  .regex(/[A-Z]/, 'Phải có ít nhất 1 chữ hoa')
+  .regex(/[a-z]/, 'Phải có ít nhất 1 chữ thường')
+  .regex(/[0-9]/, 'Phải có ít nhất 1 chữ số')
+  .regex(/[^A-Za-z0-9]/, 'Phải có ít nhất 1 ký tự đặc biệt');
+
 const loginSchema = z.object({
   username: z.string().min(3),
   password: z.string().min(4),
@@ -44,10 +53,20 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
     const body = z
       .object({
         currentPassword: z.string().min(4),
-        newPassword: z.string().min(6),
+        newPassword: strongPasswordSchema,
+        otpCode: z.string().length(6).regex(/^\d{6}$/),
       })
       .parse(req.body);
-    await authService.changePassword(req.user!.userId, body.currentPassword, body.newPassword);
+    await authService.changePassword(
+      req.user!.userId,
+      body.currentPassword,
+      body.newPassword,
+      body.otpCode,
+    );
+    const token = req.headers.authorization?.slice(7).trim();
+    if (token) {
+      revokeToken(token);
+    }
     res.json({ success: true, message: 'Đổi mật khẩu thành công' });
   } catch (err) {
     next(err);
@@ -56,9 +75,26 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
 
 router.post('/forgot-password/request-otp', async (req, res, next) => {
   try {
-    const { username } = z.object({ username: z.string().min(3) }).parse(req.body);
-    const data = await otpService.issueOtpByUsername(username, 'FORGOT_PASSWORD');
-    res.json({ success: true, data });
+    const body = z
+      .object({
+        username: z.string().trim().min(3, 'Tên đăng nhập không hợp lệ'),
+        idCardNumber: z
+          .string()
+          .trim()
+          .length(12, 'Số CCCD phải gồm 12 chữ số')
+          .regex(/^\d{12}$/, 'Số CCCD chỉ được chứa chữ số'),
+      })
+      .parse(req.body);
+    const data = await authService.issueOtpByUsernameAndIdCard(
+      body.username,
+      body.idCardNumber,
+      'FORGOT_PASSWORD',
+    );
+    res.json({
+      success: true,
+      message: 'Đã tạo mã OTP 6 số. Vui lòng nhập mã để khôi phục mật khẩu.',
+      data,
+    });
   } catch (err) {
     next(err);
   }
@@ -70,7 +106,7 @@ router.post('/forgot-password/confirm', async (req, res, next) => {
       .object({
         username: z.string().min(3),
         otpCode: z.string().length(6),
-        newPassword: z.string().min(6),
+        newPassword: strongPasswordSchema,
       })
       .parse(req.body);
     await otpService.verifyOtpByUsername(body.username, body.otpCode, 'FORGOT_PASSWORD');

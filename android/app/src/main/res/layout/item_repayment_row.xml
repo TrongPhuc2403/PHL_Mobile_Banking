@@ -6,7 +6,10 @@
     android:background="@drawable/bg_luxury_card"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="@dimen/space_md">
+    android:paddingStart="@dimen/space_base"
+    android:paddingTop="14dp"
+    android:paddingEnd="@dimen/space_base"
+    android:paddingBottom="14dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -14,28 +17,30 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvRepaymentNext"
+            style="@style/TextAppearance.PHL.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/space_xxs"
+            android:text="Kỳ tiếp theo"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvRepaymentPeriod"
-                style="@style/TextAppearance.PHL.Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFeatureSettings="tnum"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvRepaymentPeriod"
+            style="@style/TextAppearance.PHL.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFeatureSettings="tnum"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvRepaymentDueDate"
-                style="@style/TextAppearance.PHL.Caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_sm"
-                android:fontFeatureSettings="tnum" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvRepaymentDueDate"
+            style="@style/TextAppearance.PHL.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFeatureSettings="tnum" />
 
         <TextView
             android:id="@+id/tvRepaymentBreakdown"
